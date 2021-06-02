@@ -4,4 +4,8 @@ module org.example {
 
     opens org.example to javafx.fxml;
     exports org.example;
+    exports org.example.piece;
+    opens org.example.piece to javafx.fxml;
+    exports org.example.MatchHistory;
+    opens org.example.MatchHistory to javafx.fxml;
 }
