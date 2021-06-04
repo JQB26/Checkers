@@ -1,6 +1,5 @@
 package org.example;
 
-
 import javafx.geometry.HPos;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -26,10 +25,10 @@ public class View {
         mainScene = new Scene(rootPane,800,800);
         mainScene.setFill(Color.DARKGRAY);
 
-        BoardGeneration();
+        generateBoard();
     }
 
-    private void BoardGeneration() {
+    private void generateBoard() {
         Piece pawn = null;
         Tile tile;
         for (int row = 1; row<= BOARD_SIZE; row++) {
@@ -52,6 +51,7 @@ public class View {
                 pawn = null;
             }
         }
+
     }
 
     public Scene getMainScene() {
