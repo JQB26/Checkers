@@ -26,21 +26,19 @@ public class View {
         mainScene = new Scene(rootPane,800,800);
         mainScene.setFill(Color.DARKGRAY);
         Piece pawn = null;
+        Tile tile;
 
         for (int row = 1; row<=10; row++) {
             for (int col =1; col <= 10; col++) {
-                Rectangle tile = new Rectangle();
-                tile.setWidth(70);
-                tile.setHeight(70);
                 if ((row + col) % 2 == 0) {
-                    tile.setFill(Color.DARKGOLDENROD);
+                    tile = new Tile(false, col, row,null);
                     if (row<=3) {
                         pawn = new Piece(PieceType.PAWN, PieceColor.WHITE, col, row);
                     } else if (row>=8) {
                         pawn = new Piece(PieceType.PAWN, PieceColor.BLACK, col, row);
                     }
                 } else {
-                    tile.setFill(Color.BURLYWOOD);
+                    tile = new Tile(true, col, row,null);
                 }
                 boardPane.add(tile, col, row);
                 if (pawn != null) {
