@@ -15,7 +15,7 @@ public class View {
     private BorderPane rootPane;
     private GridPane boardPane;
     private Scene mainScene;
-    private static final int BOARD_SIZE = 16;
+    private static final int BOARD_SIZE = 10;
 
     public View(){
         rootPane = new BorderPane();
