@@ -1,8 +1,6 @@
 package org.example.piece;
 
-import javafx.event.EventHandler;
 import javafx.scene.Cursor;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import org.example.piece.enums.PieceColor;
@@ -32,38 +30,29 @@ public class Piece extends Circle {
         } else {
             pawn.setFill(Color.BLACK);
         }
+
         pawn.setCursor(Cursor.HAND);
-        pawn.setOnMousePressed(onMousePressedEventHandler);
-        pawn.setOnMouseDragged(onMouseDraggedEventHandler);
+
+        pawn.setOnMousePressed(t -> {
+            orgSceneX = t.getSceneX();
+            orgSceneY = t.getSceneY();
+            orgTranslateX = ((Circle) (t.getSource())).getTranslateX();
+            orgTranslateY = ((Circle) (t.getSource())).getTranslateY();
+            ((Circle) (t.getSource())).toFront();
+        });
+
+        pawn.setOnMouseDragged(t -> {
+            double offsetX = t.getSceneX() - orgSceneX;
+            double offsetY = t.getSceneY() - orgSceneY;
+            double newTranslateX = orgTranslateX + offsetX;
+            double newTranslateY = orgTranslateY + offsetY;
+
+            ((Circle) (t.getSource())).setTranslateX(newTranslateX);
+            ((Circle) (t.getSource())).setTranslateY(newTranslateY);
+
+        });
+
     }
-
-    EventHandler<MouseEvent> onMousePressedEventHandler =
-        new EventHandler<>() {
-
-            @Override
-            public void handle(MouseEvent t) {
-                orgSceneX = t.getSceneX();
-                orgSceneY = t.getSceneY();
-                orgTranslateX = ((Circle) (t.getSource())).getTranslateX();
-                orgTranslateY = ((Circle) (t.getSource())).getTranslateY();
-                ((Circle)(t.getSource())).toFront();
-            }
-        };
-
-    EventHandler<MouseEvent> onMouseDraggedEventHandler =
-        new EventHandler<>() {
-
-            @Override
-            public void handle(MouseEvent t) {
-                double offsetX = t.getSceneX() - orgSceneX;
-                double offsetY = t.getSceneY() - orgSceneY;
-                double newTranslateX = orgTranslateX + offsetX;
-                double newTranslateY = orgTranslateY + offsetY;
-
-                ((Circle) (t.getSource())).setTranslateX(newTranslateX);
-                ((Circle) (t.getSource())).setTranslateY(newTranslateY);
-            }
-        };
 
     public Piece() {
         position = new Position(-1, -1);

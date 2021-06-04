@@ -51,7 +51,6 @@ public class View {
                 pawn = null;
             }
         }
-
     }
 
     public Scene getMainScene() {
