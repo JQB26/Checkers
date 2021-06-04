@@ -6,6 +6,6 @@ module org.example {
     exports org.example;
     exports org.example.piece;
     opens org.example.piece to javafx.fxml;
-    exports org.example.MatchHistory;
-    opens org.example.MatchHistory to javafx.fxml;
+    exports org.example.piece.enums;
+    opens org.example.piece.enums to javafx.fxml;
 }
