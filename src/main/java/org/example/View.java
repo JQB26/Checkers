@@ -2,8 +2,8 @@ package org.example;
 
 
 import javafx.geometry.HPos;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -13,13 +13,17 @@ import org.example.piece.enums.PieceType;
 
 public class View {
 
-    private GridPane mainPane;
+    private BorderPane rootPane;
+    private GridPane boardPane;
     private Scene mainScene;
 
     public View(){
-        mainPane = new GridPane();
-        mainPane.setAlignment(Pos.CENTER);
-        mainScene = new Scene(mainPane,800,800);
+        rootPane = new BorderPane();
+        boardPane = new GridPane();
+        boardPane.setMaxSize(700,700);
+        boardPane.setStyle("-fx-border-color: black; -fx-border-width: 3");
+        rootPane.setCenter(boardPane);
+        mainScene = new Scene(rootPane,800,800);
         mainScene.setFill(Color.DARKGRAY);
         Piece pawn = null;
 
@@ -38,9 +42,9 @@ public class View {
                 } else {
                     tile.setFill(Color.BURLYWOOD);
                 }
-                mainPane.add(tile, col, row);
+                boardPane.add(tile, col, row);
                 if (pawn != null) {
-                    mainPane.add(pawn.getPawn(), col, row);
+                    boardPane.add(pawn.getPawn(), col, row);
                     GridPane.setHalignment(pawn.getPawn(), HPos.CENTER);
                 }
                 pawn = null;
