@@ -1,6 +1,8 @@
 package org.example.piece;
 
 import javafx.scene.Cursor;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import org.example.piece.enums.PieceColor;
@@ -12,6 +14,8 @@ public class Piece extends Circle{
     private PieceColor pieceColor;
     private Position position;
     private boolean isActive;
+    private double orgSceneX, orgSceneY, orgTranslateX, orgTranslateY;
+    private Circle draggedPawn;
 
     public Circle getPawn() {
         return pawn;
@@ -29,6 +33,40 @@ public class Piece extends Circle{
             pawn.setFill(Color.BLACK);
         }
         pawn.setCursor(Cursor.HAND);
+        pawn.setOnMousePressed(this::pressed);
+        pawn.setOnMouseDragged(this::dragged);
+        pawn.setOnMouseReleased(this::released);
+    }
+
+    public void pressed(MouseEvent e) {
+        draggedPawn = (Circle) e.getSource();
+        orgSceneX = e.getSceneX();
+        orgSceneY = e.getSceneY();
+        orgTranslateX = draggedPawn.getTranslateX();
+        orgTranslateY = draggedPawn.getTranslateY();
+        draggedPawn.toFront();
+    }
+
+    public void dragged(MouseEvent e) {
+        double offsetX = e.getSceneX() - orgSceneX;
+        double offsetY = e.getSceneY() - orgSceneY;
+        double newTranslateX = orgTranslateX + offsetX;
+        double newTranslateY = orgTranslateY + offsetY;
+
+        draggedPawn.setTranslateX(newTranslateX);
+        draggedPawn.setTranslateY(newTranslateY);
+    }
+
+    public void released(MouseEvent e) {
+        draggedPawn.setTranslateX(0);
+        draggedPawn.setTranslateY(0);
+        if(((int)e.getSceneX()-30)/70 >= 0 && ((int)e.getSceneY()-40)/70 >= 0 && ((int)e.getSceneX()-30)/70 <= 9 && ((int)e.getSceneY()-40)/70 <= 9) {
+            GridPane.setRowIndex(draggedPawn, ((int) e.getSceneY()-40)/70);
+            GridPane.setColumnIndex(draggedPawn, ((int) e.getSceneX()-30)/70);
+        } else {
+            GridPane.setRowIndex(draggedPawn, ((int) orgSceneY-30)/70);
+            GridPane.setColumnIndex(draggedPawn, ((int) orgSceneX-40)/70);
+        }
     }
 
     public Piece() {
