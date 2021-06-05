@@ -7,14 +7,13 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 
-public class App extends Application {
+public class Checkers extends Application {
 
     @Override
-    public void start(Stage stage) throws IOException {
-        URL url = new File("src/main/resources/primary.fxml").toURI().toURL();
+    public void start(Stage stage) throws Exception {
+        URL url = new File("src/main/java/org/example/view/gameview.fxml").toURI().toURL();
         BorderPane rootPane = FXMLLoader.load(url);
         stage.setScene(new Scene(rootPane, 800, 1100));
         stage.setHeight(800);
@@ -25,9 +24,4 @@ public class App extends Application {
         stage.setMinWidth(1100);
         stage.show();
     }
-
-    public static void main(String[] args) {
-        launch();
-    }
-
 }

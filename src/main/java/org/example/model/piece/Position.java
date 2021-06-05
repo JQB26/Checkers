@@ -1,4 +1,4 @@
-package org.example.piece;
+package org.example.model.piece;
 
 public class Position {
     private int currentX, currentY;

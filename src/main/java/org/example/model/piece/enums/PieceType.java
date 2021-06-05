@@ -1,4 +1,4 @@
-package org.example.piece.enums;
+package org.example.model.piece.enums;
 
 public enum PieceType {
     PAWN, QUEEN

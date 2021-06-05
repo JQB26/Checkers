@@ -1,4 +1,4 @@
-package org.example.piece.enums;
+package org.example.model.piece.enums;
 
 public enum PieceColor {
     WHITE, BLACK
