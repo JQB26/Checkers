@@ -1,11 +1,11 @@
 package org.example;
 
+import javafx.fxml.FXML;
 import javafx.geometry.HPos;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import org.example.piece.Piece;
 import org.example.piece.enums.PieceColor;
@@ -13,25 +13,16 @@ import org.example.piece.enums.PieceType;
 
 import java.util.ArrayList;
 
-public class View {
-
-    private BorderPane rootPane;
-    private GridPane boardPane;
-    private Scene mainScene;
-    private static final int BOARD_SIZE = 10;
+public class Controller {
+    @FXML
+    GridPane boardPane;
     private double orgSceneX, orgSceneY, orgTranslateX, orgTranslateY;
     private ArrayList<Piece> pawns;
     private ArrayList<Tile> tiles;
     Circle draggedPawn;
 
-    public View(){
-        rootPane = new BorderPane();
-        boardPane = new GridPane();
-        boardPane.setMaxSize(70 * BOARD_SIZE,70 * BOARD_SIZE);
-        boardPane.setStyle("-fx-border-color: black; -fx-border-width: 3");
-        rootPane.setCenter(boardPane);
-        mainScene = new Scene(rootPane,800,800);
-        mainScene.setFill(Color.DARKGRAY);
+    @FXML
+    public void initialize() {
         generateBoard();
     }
 
@@ -40,12 +31,12 @@ public class View {
         Tile tile;
         pawns = new ArrayList<>();
         tiles = new ArrayList<>();
-        for (int row = 1; row<= BOARD_SIZE; row++) {
-            for (int col = 1; col <= BOARD_SIZE; col++) {
+        for (int row = 0; row <= 9; row++) {
+            for (int col = 0; col <= 9; col++) {
                 if ((row + col) % 2 == 0) {
                     if (row<=3) {
                         pawn = new Piece(PieceType.PAWN, PieceColor.WHITE, col, row);
-                    } else if (row>=BOARD_SIZE-2) {
+                    } else if (row >= 6) {
                         pawn = new Piece(PieceType.PAWN, PieceColor.BLACK, col, row);
                     }
                     tile = new Tile(false, col, row, pawn);
@@ -68,15 +59,15 @@ public class View {
     }
 
     public void pressed(MouseEvent e) {
+        draggedPawn = (Circle) e.getSource();
         orgSceneX = e.getSceneX();
         orgSceneY = e.getSceneY();
-        orgTranslateX = ((Circle) e.getSource()).getTranslateX();
-        orgTranslateY = ((Circle) e.getSource()).getTranslateY();
-        ((Circle) e.getSource()).toFront();
+        orgTranslateX = draggedPawn.getTranslateX();
+        orgTranslateY = draggedPawn.getTranslateY();
+        draggedPawn.toFront();
     }
 
     public void dragged(MouseEvent e) {
-        draggedPawn = (Circle) e.getSource();
         double offsetX = e.getSceneX() - orgSceneX;
         double offsetY = e.getSceneY() - orgSceneY;
         double newTranslateX = orgTranslateX + offsetX;
@@ -84,25 +75,22 @@ public class View {
 
         draggedPawn.setTranslateX(newTranslateX);
         draggedPawn.setTranslateY(newTranslateY);
+        System.out.println(e.getSceneX() + ", " + e.getSceneY());
     }
 
     public void released(MouseEvent e) {
         draggedPawn.setTranslateX(0);
         draggedPawn.setTranslateY(0);
-        if(((int)e.getSceneX()+50)/70 >= 1 && ((int)e.getSceneY()+30)/70 >= 1 && ((int)e.getSceneX()+40)/70 <= 10 && ((int)e.getSceneY()+30)/70 <= 10) {
-            GridPane.setRowIndex(draggedPawn, ((int) e.getSceneY()+30)/70);
-            GridPane.setColumnIndex(draggedPawn, ((int) e.getSceneX()+40)/70);
+        if(((int)e.getSceneX()-30)/70 >= 0 && ((int)e.getSceneY()-40)/70 >= 0 && ((int)e.getSceneX()-30)/70 <= 9 && ((int)e.getSceneY()-40)/70 <= 9) {
+            GridPane.setRowIndex(draggedPawn, ((int) e.getSceneY()-40)/70);
+            GridPane.setColumnIndex(draggedPawn, ((int) e.getSceneX()-30)/70);
         } else {
-            GridPane.setRowIndex(draggedPawn, ((int) orgSceneY+30)/70);
-            GridPane.setColumnIndex(draggedPawn, ((int) orgSceneX+40)/70);
+            GridPane.setRowIndex(draggedPawn, ((int) orgSceneY-30)/70);
+            GridPane.setColumnIndex(draggedPawn, ((int) orgSceneX-40)/70);
         }
     }
 
     public void updateBoard(){
 
-    }
-
-    public Scene getMainScene() {
-        return mainScene;
     }
 }
