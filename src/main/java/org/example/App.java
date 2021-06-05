@@ -13,6 +13,12 @@ public class App extends Application {
         View manager = new View();
         scene = manager.getMainScene();
         stage.setScene(scene);
+        stage.setHeight(800);
+        stage.setWidth(800);
+        stage.setMaxHeight(800);
+        stage.setMaxWidth(800);
+        stage.setMinHeight(800);
+        stage.setMinWidth(800);
         stage.show();
     }
 
