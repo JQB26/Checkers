@@ -1,9 +1,9 @@
-package org.example;
+package org.example.model.Tile;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import org.example.piece.Piece;
-import org.example.piece.Position;
+import org.example.model.piece.Piece;
+import org.example.model.piece.Position;
 
 public class Tile extends Rectangle {
 

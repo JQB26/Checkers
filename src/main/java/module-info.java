@@ -4,8 +4,14 @@ module org.example {
 
     opens org.example to javafx.fxml;
     exports org.example;
-    exports org.example.piece;
-    opens org.example.piece to javafx.fxml;
-    exports org.example.piece.enums;
-    opens org.example.piece.enums to javafx.fxml;
+    exports org.example.model.piece;
+    opens org.example.model.piece to javafx.fxml;
+    exports org.example.model.piece.enums;
+    opens org.example.model.piece.enums to javafx.fxml;
+    exports org.example.controller;
+    opens org.example.controller to javafx.fxml;
+    exports org.example.model;
+    opens org.example.model to javafx.fxml;
+    exports org.example.model.Tile;
+    opens org.example.model.Tile to javafx.fxml;
 }

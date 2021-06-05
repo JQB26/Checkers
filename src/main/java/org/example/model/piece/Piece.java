@@ -1,10 +1,10 @@
-package org.example.piece;
+package org.example.model.piece;
 
 import javafx.scene.Cursor;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import org.example.piece.enums.PieceColor;
-import org.example.piece.enums.PieceType;
+import org.example.model.piece.enums.PieceColor;
+import org.example.model.piece.enums.PieceType;
 
 public class Piece extends Circle{
     private Circle pawn;

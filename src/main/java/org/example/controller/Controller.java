@@ -1,15 +1,14 @@
-package org.example;
+package org.example.controller;
 
 import javafx.fxml.FXML;
 import javafx.geometry.HPos;
-import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Circle;
-import org.example.piece.Piece;
-import org.example.piece.enums.PieceColor;
-import org.example.piece.enums.PieceType;
+import org.example.model.Tile.Tile;
+import org.example.model.piece.Piece;
+import org.example.model.piece.enums.PieceColor;
+import org.example.model.piece.enums.PieceType;
 
 import java.util.ArrayList;
 
