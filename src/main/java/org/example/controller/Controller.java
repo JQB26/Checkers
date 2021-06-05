@@ -1,11 +1,16 @@
-package org.example;
+package org.example.controller;
 
 import javafx.fxml.FXML;
 import javafx.geometry.HPos;
 import javafx.scene.layout.GridPane;
-import org.example.piece.Piece;
-import org.example.piece.enums.PieceColor;
-import org.example.piece.enums.PieceType;
+import org.example.model.Model;
+import org.example.model.Tile.Tile;
+import org.example.model.piece.Piece;
+import org.example.model.piece.enums.PieceColor;
+import org.example.model.piece.enums.PieceType;
+
+import java.util.ArrayList;
+
 
 public class Controller {
     @FXML
@@ -14,6 +19,7 @@ public class Controller {
     @FXML
     public void initialize() {
         generateBoard();
+        getWhitePieces();
     }
 
     private void generateBoard() {
@@ -39,5 +45,10 @@ public class Controller {
                 pawn = null;
             }
         }
+    }
+
+    private void getWhitePieces() {
+        Model model = new Model();
+        System.out.println(model.getWhitePieces().size());
     }
 }

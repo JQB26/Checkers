@@ -7,11 +7,11 @@ import java.util.ArrayList;
 
 public class Model {
     private ArrayList<Piece> whitePieces;
-    private ArrayList<Piece> blakPieces;
+    private ArrayList<Piece> blackPieces;
 
     public Model() {
         whitePieces = new ArrayList<>();
-        blakPieces = new ArrayList<>();
+        blackPieces = new ArrayList<>();
     }
 
 
@@ -20,7 +20,7 @@ public class Model {
             whitePieces.add(piece);
         }
         else{
-            blakPieces.add(piece);
+            blackPieces.add(piece);
         }
     }
 
@@ -30,8 +30,8 @@ public class Model {
         return whitePieces;
     }
 
-    public ArrayList<Piece> getBlakPieces() {
-        return blakPieces;
+    public ArrayList<Piece> getBlackPieces() {
+        return blackPieces;
     }
 
 }
