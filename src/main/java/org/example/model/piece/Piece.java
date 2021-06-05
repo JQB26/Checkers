@@ -5,13 +5,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import org.example.model.Model;
+import org.example.model.Board;
 import org.example.model.piece.enums.PieceColor;
 import org.example.model.piece.enums.PieceType;
 
-import java.util.ArrayList;
-
-public class Piece extends Circle{
+public class Piece{
     private Circle pawn;
     private PieceType pieceType;
     private PieceColor pieceColor;
@@ -19,7 +17,6 @@ public class Piece extends Circle{
     private boolean isActive;
     private double orgSceneX, orgSceneY, orgTranslateX, orgTranslateY;
     private Circle draggedPawn;
-    private Model model;
 
     public Circle getPawn() {
         return pawn;
@@ -29,15 +26,12 @@ public class Piece extends Circle{
         this.pieceType = pieceType;
         this.pieceColor = pieceColor;
         pawn = new Circle();
-        model = new Model();
         position = new Position(x, y);
         pawn.setRadius(30);
         if(pieceColor == PieceColor.WHITE){
             pawn.setFill(Color.WHITE);
-            model.addPiece(this);
         } else {
             pawn.setFill(Color.BLACK);
-            model.addPiece(this);
         }
         pawn.setCursor(Cursor.HAND);
         pawn.setOnMousePressed(this::pressed);
