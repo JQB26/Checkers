@@ -13,6 +13,7 @@ public class Tile {
 
     private Rectangle rectangle;
     private Position position;
+    private boolean visited = false;
 
     public void setPiece(Piece piece) {
         this.piece = piece;
@@ -44,4 +45,8 @@ public class Tile {
     public Piece getPiece() {
         return piece;
     }
+
+    public boolean isVisited(){return visited;}
+
+    public void setVisited(boolean visited){this.visited = visited;}
 }

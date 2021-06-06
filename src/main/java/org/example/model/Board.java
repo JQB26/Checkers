@@ -7,6 +7,7 @@ import org.example.model.piece.enums.PieceType;
 import org.example.model.position.Position;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Board implements IBoard {
@@ -18,7 +19,6 @@ public class Board implements IBoard {
         whitePieces = new ArrayList<>();
         blackPieces = new ArrayList<>();
         tiles = new Tile[10][10];
-
         generateBoard();
     }
 
@@ -42,74 +42,10 @@ public class Board implements IBoard {
         }
     }
 
-    public List<Position> getValidMoves(Piece piece) {
-        ArrayList<Position> results = new ArrayList<>();
-        int x = piece.getPosition().getCurrentX();
-        int y = piece.getPosition().getCurrentY();
-
-        // one space moves
-        if (piece.getPieceColor() == PieceColor.WHITE) {
-            if (y <= 8) {
-                if (x >= 1) {
-                    if (tiles[x - 1][y + 1].getPiece() == null) {
-                        results.add(new Position(x - 1, y + 1));
-                    }
-                }
-                if (x <= 8) {
-                    if ((tiles[x + 1][y + 1].getPiece() == null)) {
-                        results.add(new Position(x + 1, y + 1));
-                    }
-                }
-            }
-        } else {
-            if (y >= 1) {
-                if (x >= 1) {
-                    if (tiles[x - 1][y - 1].getPiece() == null) {
-                        results.add(new Position(x - 1, y - 1));
-                    }
-                }
-                if (x <= 8) {
-                    if ((tiles[x + 1][y - 1].getPiece() == null)) {
-                        results.add(new Position(x + 1, y - 1));
-                    }
-                }
-            }
-        }
-        return results;
-    }
-
-    public List<Position> getValidJumps(Piece piece) {
-        ArrayList<Position> results = new ArrayList<>();
-        int x = piece.getPosition().getCurrentX();
-        int y = piece.getPosition().getCurrentY();
-
-        int[] dirDestX = {-2, 2, -2, 2};
-        int[] dirDestY = {-2, -2, 2, 2};
-        int[] dirThroughX = {-1, 1, -1, 1};
-        int[] dirThroughY = {-1, -1, 1, 1};
-
-        // jumps over opponents' pieces
-        for (int dir = 0; dir <= 3; dir++) {
-            int toX = x + dirDestX[dir];
-            int toY = y + dirDestY[dir];
-            int throughX = x + dirThroughX[dir];
-            int throughY = y + dirThroughY[dir];
-
-            if (toX >= 0 && toX <= 9 && toY >= 0 && toY <= 9) {
-                if (tiles[toX][toY].getPiece() == null && tiles[throughX][throughY].getPiece() != null) {
-                    if (tiles[throughX][throughY].getPiece().getPieceColor() != piece.getPieceColor()) {
-                        results.add(new Position(toX, toY));
-                    }
-                }
-            }
-        }
-        return results;
-    }
-
     public void printBoard() {
         System.out.println("_____________________");
         for (int row = 0; row <= 9; row++) {
-            System.out.print("|");
+            System.out.print(row + "|");
             for (int col = 0; col <= 9; col++) {
                 if (tiles[col][row].getPiece() != null) {
                     if (tiles[col][row].getPiece().getPieceColor() == PieceColor.WHITE) {
@@ -139,6 +75,8 @@ public class Board implements IBoard {
     public Piece getPiece(int x, int y) {
         return tiles[x][y].getPiece();
     }
+
+    public Tile[][] getTiles(){return this.tiles;}
 
 
     public ArrayList<Piece> getWhitePieces() {
