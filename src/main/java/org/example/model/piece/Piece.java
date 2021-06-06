@@ -5,7 +5,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import org.example.model.Board;
+import org.example.model.position.Position;
 import org.example.model.piece.enums.PieceColor;
 import org.example.model.piece.enums.PieceType;
 

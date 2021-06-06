@@ -1,4 +1,4 @@
-package org.example.model.piece;
+package org.example.model.position;
 
 public class Position {
     private int currentX, currentY;
@@ -8,9 +8,11 @@ public class Position {
     public Position(int currentX, int currentY) {
         this.currentX = currentX;
         this.currentY = currentY;
+        prevX = -1;
+        prevY = -1;
     }
 
-    public Position(int currentX, int currentY, int prevX, int prev_y) {
+    public Position(int currentX, int currentY, int prevX, int prevY) {
         this.currentX = currentX;
         this.currentY = currentY;
         this.prevX = prevX;

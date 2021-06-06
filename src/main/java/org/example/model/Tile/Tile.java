@@ -3,7 +3,7 @@ package org.example.model.Tile;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import org.example.model.piece.Piece;
-import org.example.model.piece.Position;
+import org.example.model.position.Position;
 
 public class Tile {
 
@@ -13,6 +13,11 @@ public class Tile {
 
     private Rectangle rectangle;
     private Position position;
+
+    public void setPiece(Piece piece) {
+        this.piece = piece;
+    }
+
     private Piece piece;
     private Color color;
 

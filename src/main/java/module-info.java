@@ -16,4 +16,6 @@ module org.example {
     opens org.example.model.Tile to javafx.fxml;
     exports org.example.view;
     opens org.example.view to javafx.fxml;
+    exports org.example.model.position;
+    opens org.example.model.position to javafx.fxml;
 }
