@@ -95,15 +95,12 @@ public class Board implements IBoard {
             int throughX = x + dirThroughX[dir];
             int throughY = y + dirThroughY[dir];
 
-            if (piece.getPosition().getPrevX() != toX || piece.getPosition().getPrevY() != toY) {
-                if (toX >= 0 && toX <= 9 && toY >= 0 && toY <= 9) {
-                    if (tiles[toX][toY].getPiece() == null && tiles[throughX][throughY].getPiece() != null) {
-                        if (tiles[throughX][throughY].getPiece().getPieceColor() != piece.getPieceColor()) {
-                            results.add(new Position(toX, toY));
-                        }
+            if (toX >= 0 && toX <= 9 && toY >= 0 && toY <= 9) {
+                if (tiles[toX][toY].getPiece() == null && tiles[throughX][throughY].getPiece() != null) {
+                    if (tiles[throughX][throughY].getPiece().getPieceColor() != piece.getPieceColor()) {
+                        results.add(new Position(toX, toY));
                     }
                 }
-
             }
         }
         return results;
