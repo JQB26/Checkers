@@ -1,6 +1,5 @@
 package org.example.model;
 
-import javafx.scene.paint.Color;
 import org.example.model.Tile.Tile;
 import org.example.model.piece.Piece;
 import org.example.model.piece.enums.PieceColor;
@@ -39,6 +38,26 @@ public class Board implements IBoard{
                 }
             }
         }
+    }
+
+    public void printBoard(){
+        System.out.println("_____________________");
+        for(int row = 0; row <= 9; row++){
+            System.out.print("|");
+            for(int col = 0; col <= 9; col++){
+                if(tiles[col][row].getPiece() != null){
+                    if(tiles[col][row].getPiece().getPieceColor() == PieceColor.WHITE){
+                        System.out.print("W|");
+                    } else {
+                        System.out.print("B|");
+                    }
+                } else {
+                    System.out.print(" |");
+                }
+            }
+            System.out.println();
+        }
+        System.out.println("_____________________");
     }
 
     public void movePiece(Piece piece, int x, int y){
