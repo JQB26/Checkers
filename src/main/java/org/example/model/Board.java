@@ -44,6 +44,10 @@ public class Board implements IBoard {
 
     public void printBoard() {
         System.out.println("_____________________");
+        System.out.print( " |");
+        for (int row = 0; row <= 9; row++)
+            System.out.print( row + "|");
+        System.out.println();
         for (int row = 0; row <= 9; row++) {
             System.out.print(row + "|");
             for (int col = 0; col <= 9; col++) {

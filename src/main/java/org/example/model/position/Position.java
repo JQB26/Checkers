@@ -49,4 +49,26 @@ public class Position {
     public int getPrevY() {
         return prevY;
     }
+
+    @Override
+    public boolean equals(Object obj){
+        if(obj == null) return false;
+        if(getClass() != obj.getClass()) return false;
+        final Position other = (Position) obj;
+        boolean sameCurX = (this.currentX == other.currentX);
+        boolean sameCurY = (this.currentX == other.currentY);
+        boolean samePrevX = (this.prevX == other.prevX);
+        boolean samePrevY = (this.prevY == other.prevY);
+        return sameCurX && sameCurY && samePrevX && samePrevY;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 15 * hash + this.currentX;
+        hash = 15 * hash + this.currentY*2;
+        hash = 15 * hash + this.prevX*3;
+        hash = 15 * hash + this.prevY*4;
+        return hash;
+    }
 }

@@ -1,7 +1,6 @@
 package org.example.controller;
 
 import org.example.model.Board;
-import org.example.model.MoveValidator;
 import org.example.model.piece.enums.PieceColor;
 import org.example.model.position.Position;
 import org.example.view.GameView;
@@ -37,12 +36,8 @@ public class GameController {
         Scanner scan = new Scanner(System.in);
         System.out.println("Enter " + this.onMove + "'s next move");
         int pX = scan.nextInt(), pY = scan.nextInt();//from
-        List<Position> list = moveValidator.getValidMoves(board.getPiece(pX ,pY));
         System.out.println("Following positions are available:");
-        for(Position position: list){
-            System.out.print("[" + position.getCurrentX() + "," + position.getCurrentY() + "]");
-        }
-        System.out.println();
+        List<List<Position>> list = moveValidator.getValidMoves(board.getPiece(pX ,pY));
         int nX = scan.nextInt(), nY = scan.nextInt();//to
         this.board.movePiece(this.board.getPiece(pX,pY),nX,nY);
         changeTurn();
