@@ -11,14 +11,14 @@ import java.util.List;
 public class MoveValidator {
     Board board;
 
-    public MoveValidator(Board board){
+    public MoveValidator(Board board) {
         this.board = board;
     }
 
-    public List<Position> getValidJumps(Position pos, PieceColor col) {
+    public List<Position> getValidJumps(Piece piece) {
         ArrayList<Position> results = new ArrayList<>();
-        int x = pos.getCurrentX();
-        int y = pos.getCurrentY();
+        int x = piece.getPosition().getCurrentX();
+        int y = piece.getPosition().getCurrentY();
 
         int[] dirDestX = {-2, 2, -2, 2};
         int[] dirDestY = {-2, -2, 2, 2};
@@ -34,7 +34,7 @@ public class MoveValidator {
 
             if (toX >= 0 && toX <= 9 && toY >= 0 && toY <= 9) {
                 if (this.board.getTiles()[toX][toY].getPiece() == null && this.board.getTiles()[throughX][throughY].getPiece() != null) {
-                    if (this.board.getTiles()[throughX][throughY].getPiece().getPieceColor() != col) {
+                    if (this.board.getTiles()[throughX][throughY].getPiece().getPieceColor() != piece.getPieceColor()) {
                         results.add(new Position(toX, toY));
                     }
                 }
@@ -43,16 +43,22 @@ public class MoveValidator {
         return results;
     }
 
-    public void unVisit(){
+    public void unVisit() {
         Arrays.stream(this.board.getTiles()).forEach(t -> Arrays.stream(t).forEach(tile -> tile.setVisited(true)));
     }
-
 
 
     public List<Position> getValidMoves(Piece piece) {
         ArrayList<Position> results = new ArrayList<>();
         int x = piece.getPosition().getCurrentX();
         int y = piece.getPosition().getCurrentY();
+
+        // >1 space moves
+        List<Position> jumps = getValidJumps(piece);
+
+        if (!jumps.isEmpty()) {
+            return jumps;
+        }
 
         // one space moves
         if (piece.getPieceColor() == PieceColor.WHITE) {
@@ -82,8 +88,6 @@ public class MoveValidator {
                 }
             }
         }
-        // >1 space moves
-        List<Position> jumps = getValidJumps(piece.getPosition(),piece.getPieceColor());
 
         return results;
     }
