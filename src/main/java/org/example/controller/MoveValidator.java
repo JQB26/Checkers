@@ -1,6 +1,5 @@
 package org.example.controller;
 
-import javafx.geometry.Pos;
 import org.example.model.Board;
 import org.example.model.Tile.Tile;
 import org.example.model.piece.Piece;
@@ -21,7 +20,7 @@ public class MoveValidator {
         this.board = board;
     }
 
-    public List<Position> getValidJumps(Position pos, PieceColor color){
+    public List<Position> trimJumps(Position pos, PieceColor color){
         List<Position> paths = getPaths(pos, color);
         return IntStream.range(0,paths.size())
                 .filter(n -> n%2 != 0)
@@ -84,7 +83,7 @@ public class MoveValidator {
         int y = piece.getPosition().getCurrentY();
 
         // >1 space moves
-        List<Position> jumps = getValidJumps(piece.getPosition(),piece.getPieceColor());
+        List<Position> jumps = trimJumps(piece.getPosition(),piece.getPieceColor());
 
         List<Position> currJumps = new ArrayList<>();
         List<List<Position>> allJumps = new ArrayList<>();
@@ -98,20 +97,14 @@ public class MoveValidator {
         unVisit();
 
         if (!allJumps.isEmpty()) {
+            piece.setCanJump(true);
             int max = allJumps.stream().mapToInt(List::size).max().getAsInt();
-            List<List<Position>> finalJumps = allJumps.stream().filter(l -> l.size() == max).collect(Collectors.toList());
-            finalJumps.forEach(
-                    j -> {
-                        System.out.println("\nList of moves:");
-                        for(Position position: j){
-                            System.out.print("[" + position.getCurrentX() + "," + position.getCurrentY() + "]");
-                        }
-                    }
-            );
-            return allJumps;
+            piece.setMoves(max);
+            return allJumps.stream().filter(l -> l.size() == max).collect(Collectors.toList());
         }
 
         // one space moves
+        piece.setCanJump(false);
         if (piece.getPieceColor() == PieceColor.WHITE) {
             if (y <= 8) {
                 if (x >= 1) {
@@ -139,15 +132,6 @@ public class MoveValidator {
                 }
             }
         }
-
-        allJumps.forEach(
-                    j -> {
-                        System.out.println("\nList of moves:");
-                        for(Position position: j){
-                            System.out.print("[" + position.getCurrentX() + "," + position.getCurrentY() + "]");
-                        }
-                    }
-            );
 
         return allJumps;
     }

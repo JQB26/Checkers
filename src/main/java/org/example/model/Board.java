@@ -82,6 +82,17 @@ public class Board implements IBoard {
 
     public Tile[][] getTiles(){return this.tiles;}
 
+    public void removePiece(int x, int y){
+        List<Piece> removingFrom = tiles[x][y].getPiece().getPieceColor() == PieceColor.WHITE ? this.whitePieces : this.blackPieces;
+        int i = 0;
+        for(; i < removingFrom.size(); i++){
+            Piece p = removingFrom.get(i);
+            if(p.getPosition().equals(new Position(x,y)))
+                break;
+        }
+        removingFrom.remove(i);
+        tiles[x][y].setPiece(null);
+    }
 
     public ArrayList<Piece> getWhitePieces() {
         return whitePieces;

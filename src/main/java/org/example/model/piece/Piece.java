@@ -9,6 +9,8 @@ import org.example.model.position.Position;
 import org.example.model.piece.enums.PieceColor;
 import org.example.model.piece.enums.PieceType;
 
+import java.util.List;
+
 public class Piece{
     private Circle pawn;
     private PieceType pieceType;
@@ -17,6 +19,9 @@ public class Piece{
     private boolean isActive;
     private double orgSceneX, orgSceneY, orgTranslateX, orgTranslateY;
     private Circle draggedPawn;
+    private List<List<Position>> moveList;
+    private int moves;
+    private boolean canJump = false;
 
     public Circle getPawn() {
         return pawn;
@@ -110,5 +115,16 @@ public class Piece{
         isActive = active;
     }
 
+    public void setMoveList(List<List<Position>> moveList){this.moveList = moveList;}
+
+    public List<List<Position>> getMoveList(){return this.moveList;}
+
+    public void setMoves(int moves) { this.moves = moves; }
+
+    public int getMoves() { return moves; }
+
+    public void setCanJump(boolean canJump) { this.canJump = canJump; }
+
+    public boolean getCanJump() { return canJump; }
 
 }
