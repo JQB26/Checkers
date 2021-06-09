@@ -19,7 +19,6 @@ public class Board implements IBoard {
         whitePieces = new ArrayList<>();
         blackPieces = new ArrayList<>();
         tiles = new Tile[10][10];
-        generateBoard();
     }
 
     public void generateBoard() {
@@ -73,9 +72,10 @@ public class Board implements IBoard {
     }
 
     public void movePiece(Piece piece, int x, int y) {
-        tiles[piece.getPosition().getCurrentX()][piece.getPosition().getCurrentY()].setPiece(null);
-        tiles[x][y].setPiece(piece);
+        int pX = piece.getPosition().getCurrentX(), pY = piece.getPosition().getCurrentY();
         piece.moveTo(x, y);
+        tiles[pX][pY].setPiece(null);
+        tiles[x][y].setPiece(piece);
     }
 
     public Tile getTile(int x, int y) {
@@ -90,11 +90,15 @@ public class Board implements IBoard {
 
     public void removePiece(int x, int y){
         List<Piece> removingFrom = tiles[x][y].getPiece().getPieceColor() == PieceColor.WHITE ? this.whitePieces : this.blackPieces;
+        System.out.println(tiles[x][y].getPiece().getPieceColor());
         int i = 0;
         for(; i < removingFrom.size(); i++){
             Piece p = removingFrom.get(i);
-            if(p.getPosition().equals(new Position(x,y)))
+            System.out.print("X " + p.getPosition().getCurrentX() + " y " + p.getPosition().getCurrentY());
+            System.out.println();
+            if(p.getPosition().equals(new Position(x,y))) {
                 break;
+            }
         }
         removingFrom.remove(i);
         tiles[x][y].setPiece(null);

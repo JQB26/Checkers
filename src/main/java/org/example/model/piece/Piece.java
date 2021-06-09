@@ -9,6 +9,7 @@ import org.example.model.position.Position;
 import org.example.model.piece.enums.PieceColor;
 import org.example.model.piece.enums.PieceType;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Piece{
@@ -19,7 +20,7 @@ public class Piece{
     private boolean isActive;
     private double orgSceneX, orgSceneY, orgTranslateX, orgTranslateY;
     private Circle draggedPawn;
-    private List<List<Position>> moveList;
+    private List<List<Position>> moveList = new ArrayList<>();
     private int moves;
     private boolean canJump = false;
 
