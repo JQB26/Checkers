@@ -3,6 +3,7 @@ package org.example.controller;
 import org.example.model.Board;
 import org.example.model.piece.Piece;
 import org.example.model.piece.enums.PieceColor;
+import org.example.model.piece.enums.PieceType;
 import org.example.model.position.Position;
 import org.example.view.GameView;
 
@@ -85,6 +86,7 @@ public class GameController {
                 pX = nX;
                 pY = nY;
                 moved.setMoveList(this.moveValidator.getValidMoves(moved));
+                promote(this.board.getPiece(pX,pY));
                 this.board.printBoard();
                 this.board.getPiece(pX,pY).getMoveList().forEach(
                         j -> {
@@ -107,6 +109,11 @@ public class GameController {
         int midY = (Py + Ny)/2;
         if(midX != Px && midX != Nx)
             this.board.removePiece(midX,midY);
+    }
+
+    void promote(Piece piece){
+        if (piece.getPosition().getCurrentY() == 0 || piece.getPosition().getCurrentY() == 9)
+            piece.setPieceType(PieceType.QUEEN);
     }
 
     public void run(){

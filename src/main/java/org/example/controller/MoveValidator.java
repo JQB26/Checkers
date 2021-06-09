@@ -132,7 +132,15 @@ public class MoveValidator {
                 }
             }
         }
+        return allJumps;
+    }
 
+    public List<List<Position>> getValidMovesQueen(Piece piece){
+        List<List<Position>> allJumps = new ArrayList<>();
+        int x = piece.getPosition().getCurrentX();
+        int y = piece.getPosition().getCurrentY();
+        //one space moves
+        piece.setCanJump(false);
         return allJumps;
     }
 

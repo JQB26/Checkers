@@ -53,9 +53,15 @@ public class Board implements IBoard {
             for (int col = 0; col <= 9; col++) {
                 if (tiles[col][row].getPiece() != null) {
                     if (tiles[col][row].getPiece().getPieceColor() == PieceColor.WHITE) {
-                        System.out.print("W|");
+                        if(tiles[col][row].getPiece().getPieceType() == PieceType.PAWN)
+                            System.out.print("W|");
+                        else
+                            System.out.print("Q|");
                     } else {
-                        System.out.print("B|");
+                        if(tiles[col][row].getPiece().getPieceType() == PieceType.PAWN)
+                            System.out.print("B|");
+                        else
+                            System.out.print("q|");
                     }
                 } else {
                     System.out.print(" |");
