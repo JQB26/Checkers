@@ -1,17 +1,14 @@
 package org.example.model.piece;
 
-import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import org.example.Checkers;
 import org.example.controller.GameController;
 import org.example.model.position.Position;
 import org.example.model.piece.enums.PieceColor;
 import org.example.model.piece.enums.PieceType;
-import org.example.view.GameView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -107,7 +104,7 @@ public class Piece{
     }
 
     public void moveTo(int x, int y) {
-        position.MoveTo(x, y);
+        position.moveTo(x, y);
     }
 
     public void promote(){

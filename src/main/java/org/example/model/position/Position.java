@@ -19,7 +19,7 @@ public class Position {
         this.prevY = prevY;
     }
 
-    public void MoveTo(int x, int y) {
+    public void moveTo(int x, int y) {
         setCurrentX(x);
         setCurrentY(y);
     }
