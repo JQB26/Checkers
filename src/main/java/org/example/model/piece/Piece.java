@@ -11,6 +11,7 @@ import org.example.controller.GameController;
 import org.example.model.position.Position;
 import org.example.model.piece.enums.PieceColor;
 import org.example.model.piece.enums.PieceType;
+import org.example.view.GameView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,7 @@ public class Piece{
     private double orgSceneX, orgSceneY, orgTranslateX, orgTranslateY;
     private Circle draggedCircle;
     private Circle prevCircle;
+    private GridPane boardPane;
     private List<List<Position>> moveList = new ArrayList<>();
     private int moves;
     private boolean canJump = false;
@@ -55,6 +57,7 @@ public class Piece{
 
     public void pressed(MouseEvent e) {
         draggedCircle = (Circle) e.getSource();
+        //draggedCircle.setStyle("-fx-image: url(https://img.itch.zone/aW1hZ2UvMjIxMDcyLzEwNDM4NzgucG5n/original/a5kQN6.png)");
         orgSceneX = e.getSceneX();
         orgSceneY = e.getSceneY();
         orgTranslateX = draggedCircle.getTranslateX();

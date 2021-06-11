@@ -1,6 +1,12 @@
 package org.example.controller;
 
+import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import org.example.Checkers;
 import org.example.model.Board;
 import org.example.model.piece.Piece;
@@ -18,6 +24,7 @@ public class GameController {
     private GameView gameView;
     private MoveValidator moveValidator;
     private PieceColor onMove = PieceColor.WHITE;
+    private GridPane gridPane;
     private static final GameController INSTANCE = new GameController();
     boolean anyJumps = false;
 
@@ -29,6 +36,7 @@ public class GameController {
         this.moveValidator = new MoveValidator(this.board);
         this.gameView = new GameView();
         this.board.generateBoard();
+        this.gridPane = new GridPane();
     }
 
     public Board getBoard(){return this.board;}
@@ -40,6 +48,23 @@ public class GameController {
         this.anyJumps=false;
     }
 
+    public void setBoardPane(GridPane gp){
+        gridPane = gp;
+    }
+
+    public Node getNode(int x, int y) {
+        Node result = null;
+        ObservableList<Node> children = gridPane.getChildren();
+
+        for (Node node : children) {
+            if(GridPane.getRowIndex(node) == y && GridPane.getColumnIndex(node) == x && node.getClass() == Circle.class) {
+                result = node;
+                break;
+            }
+        }
+
+        return result;
+    }
 
     public int getListsAndMaxMoves(){
         List<Piece> pieces = (this.onMove==PieceColor.WHITE)?this.board.getWhitePieces():this.board.getBlackPieces();
@@ -120,6 +145,7 @@ public class GameController {
         for(; x != Nx && y != Ny; x+=cX , y+=cY) {
             System.out.println(x + " " + y);
             if (this.board.getPiece(x, y) != null) {
+                gridPane.getChildren().remove(getNode(x,y));
                 this.board.removePiece(x, y);
                 break;
             }

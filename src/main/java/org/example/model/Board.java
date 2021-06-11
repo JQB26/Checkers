@@ -7,7 +7,6 @@ import org.example.model.piece.enums.PieceType;
 import org.example.model.position.Position;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Board implements IBoard {

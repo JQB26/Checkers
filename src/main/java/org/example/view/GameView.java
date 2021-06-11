@@ -1,45 +1,32 @@
 package org.example.view;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
-import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-import org.example.Checkers;
+import org.example.controller.GameController;
 import org.example.model.Board;
 import org.example.model.Tile.Tile;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
-public class GameView implements Initializable{
+public class GameView {
 
     private Board board = new Board();
-
-    public Node[][] getGridPaneArray() {
-        return gridPaneArray;
-    }
-
-    private Node[][] gridPaneArray = null;
 
     @FXML
     private GridPane boardPane;
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    @FXML
+    public void initialize() {
         board.generateBoard();
         generateBoard();
-        this.gridPaneArray = new Node[11][11];
-        for(Node node : this.boardPane.getChildren()){
-            this.gridPaneArray[GridPane.getRowIndex(node)][GridPane.getColumnIndex(node)] = node;
-        }
+        GameController.getInstance().setBoardPane(boardPane);
     }
 
     public void generateBoard(){
+        int j = 0;
         for(int row = 0; row <= 9; row++){
             for(int col = 0; col <= 9; col++){
                 Tile tile = board.getTile(col, row);
