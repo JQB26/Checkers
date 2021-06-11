@@ -154,8 +154,10 @@ public class GameController {
     }
 
     void promote(Piece piece){
-        if (piece.getPosition().getCurrentY() == 0 || piece.getPosition().getCurrentY() == 9)
+        if (piece.getPosition().getCurrentY() == 0 || piece.getPosition().getCurrentY() == 9) {
             piece.setPieceType(PieceType.QUEEN);
+            ((Circle)gridPane.getChildren().get(gridPane.getChildren().indexOf(getNode(piece.getPosition().getCurrentX(), piece.getPosition().getCurrentY())))).setStroke(Color.RED);
+        }
     }
 
     public void run(){
