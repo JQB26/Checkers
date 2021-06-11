@@ -29,6 +29,8 @@ public class GameController {
     boolean anyJumps = false;
     private int prevX = 0;
     private int prevY = 0;
+    private int movesLeft = 0;
+    private Piece moved = null;
     private static final GameController INSTANCE = new GameController();
 
     public static GameController getInstance(){return INSTANCE;}
@@ -116,7 +118,7 @@ public class GameController {
         int maxMove = getListsAndMaxMoves();
         Piece p;
         p = this.board.getPiece(pX, pY);
-        if(p.getPieceColor() == onMove && p.getMoves() == maxMove && (anyJumps == p.getCanJump())) {
+        if(p.getPieceColor() == onMove && p.getMoves() == maxMove && (anyJumps == p.getCanJump()) && moved == null) {
             removeMoveHighlight();
             removeTileHighlight(prevX, prevY);
             addTileHighlight(pX,pY);
@@ -130,6 +132,18 @@ public class GameController {
                     }
             );
             return this.moveValidator.getValidMoves(p);
+        } else if (moved == this.board.getPiece(pX, pY)){
+            addTileHighlight(pX,pY);
+            prevX = pX;
+            prevY = pY;
+            moved.getMoveList().forEach(
+                    j -> {
+                        for (Position position : j) {
+                            addMoveHighlight(position.getCurrentX(),position.getCurrentY());
+                        }
+                    }
+            );
+            return moved.getMoveList();
         } else {
             return null;
         }
@@ -138,34 +152,20 @@ public class GameController {
     public void move(int pX, int pY, int nX, int nY) {
         removeTileHighlight(pX, pY);
         removeMoveHighlight();
-        List<List<Position>> list = this.moveValidator.getValidMoves(board.getPiece(pX ,pY));
-        int nOfMoves = (list.isEmpty())?0:list.get(0).size();
-        while (nOfMoves --> 0) {
-            if(list.stream().anyMatch(j -> j.contains(new Position(nX,nY)))) {
-                this.board.movePiece(this.board.getPiece(pX, pY), nX, nY);
-                capture(pX,pY,nX,nY);
-                Piece moved = this.board.getPiece(nX, nY);
-                pX = nX;
-                pY = nY;
-                moved.setMoveList(this.moveValidator.getValidMoves(moved));
-                promote(this.board.getPiece(pX,pY));
-                if(nOfMoves > 0) {
-                    this.board.getPiece(pX, pY).getMoveList().forEach(
-                            j -> {
-                                System.out.println("\nList of moves:");
-                                for (Position position : j) {
-                                    System.out.print("[" + position.getCurrentX() + "," + position.getCurrentY() + "]");
-                                }
-                            }
-                    );
-                }
-            }else{
-                System.out.println("Wrong move");
-                nOfMoves++;
-            }
+        movesLeft--;
+        this.board.movePiece(this.board.getPiece(pX, pY), nX, nY);
+        capture(pX,pY,nX,nY);
+        moved = this.board.getPiece(nX, nY);
+        pX = nX;
+        pY = nY;
+        moved.setMoveList(this.moveValidator.getValidMoves(moved));
+        promote(this.board.getPiece(pX,pY));
+        if (movesLeft == 0) {
+            moved = null;
+            changeTurn();
+            this.board.printBoard();
+            movesLeft = getListsAndMaxMoves();
         }
-        changeTurn();
-        this.board.printBoard();
     }
 
     void capture(int Px, int Py, int Nx, int Ny){
@@ -229,5 +229,6 @@ public class GameController {
         this.anyJumps = false;
         this.onMove = PieceColor.WHITE;
         this.board.printBoard();
+        movesLeft = getListsAndMaxMoves();
     }
 }

@@ -62,8 +62,9 @@ public class Piece{
         orgSceneY = e.getSceneY();
         orgTranslateX = draggedCircle.getTranslateX();
         orgTranslateY = draggedCircle.getTranslateY();
+        draggedCircle.toFront();
         legalMoves = GameController.getInstance().select(((int) e.getSceneX() - 30) / 70, ((int) e.getSceneY() - 40) / 70);
-        maxMoves = GameController.getInstance().getListsAndMaxMoves();
+        maxMoves = (legalMoves == null)?0:legalMoves.size();
         draggedCircle.toFront();
     }
 
@@ -80,14 +81,14 @@ public class Piece{
     public void released(MouseEvent e) {
         draggedCircle.setTranslateX(0);
         draggedCircle.setTranslateY(0);
-        if (((int) e.getSceneX() - 30) / 70 >= 0 && ((int) e.getSceneY() - 40) / 70 >= 0 && ((int) e.getSceneX() - 30) / 70 <= 9 && ((int) e.getSceneY() - 40) / 70 <= 9 && legalMoves != null && ((prevMaxMoves > 1 && draggedCircle == prevCircle) || prevMaxMoves == 1)) {
+        if (((int) e.getSceneX() - 30) / 70 >= 0 && ((int) e.getSceneY() - 40) / 70 >= 0 && ((int) e.getSceneX() - 30) / 70 <= 9 && ((int) e.getSceneY() - 40) / 70 <= 9 && legalMoves != null && maxMoves > 0) {
             legalMoves.forEach(
                     j -> {
                         for(Position position: j) {
                             if (position.getCurrentX() == ((int) e.getSceneX() - 30) / 70 && position.getCurrentY() == ((int) e.getSceneY() - 40) / 70) {
                                 GridPane.setRowIndex(draggedCircle, ((int) e.getSceneY() - 40) / 70);
                                 GridPane.setColumnIndex(draggedCircle, ((int) e.getSceneX() - 30) / 70);
-                                GameController.getInstance().move(getPosition().getCurrentX(), getPosition().getCurrentY(), ((int) e.getSceneX() - 30) / 70, ((int) e.getSceneY() - 40) / 70);
+                                GameController.getInstance().move(((int) (orgSceneX - 30) / 70), ((int) (orgSceneY - 40) / 70), ((int) e.getSceneX() - 30) / 70, ((int) e.getSceneY() - 40) / 70);
                                 prevCircle = draggedCircle;
                                 prevMaxMoves = maxMoves;
                             }
