@@ -1,57 +1,70 @@
 package org.example.model.piece;
 
+import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import org.example.Checkers;
+import org.example.controller.GameController;
 import org.example.model.position.Position;
 import org.example.model.piece.enums.PieceColor;
 import org.example.model.piece.enums.PieceType;
+import org.example.view.GameView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Piece{
-    private Circle pawn;
+    private Circle circle;
     private PieceType pieceType;
     private PieceColor pieceColor;
     private Position position;
     private boolean isActive;
     private double orgSceneX, orgSceneY, orgTranslateX, orgTranslateY;
-    private Circle draggedPawn;
+    private Circle draggedCircle;
+    private Circle prevCircle;
+    private GridPane boardPane;
     private List<List<Position>> moveList = new ArrayList<>();
     private int moves;
     private boolean canJump = false;
+    private List<List<Position>> legalMoves;
+    private int maxMoves;
+    private int prevMaxMoves = 1;
 
-    public Circle getPawn() {
-        return pawn;
+    public Circle getCircle() {
+        return circle;
     }
 
     public Piece(PieceType pieceType, PieceColor pieceColor, int x, int y) {
         this.pieceType = pieceType;
         this.pieceColor = pieceColor;
-        pawn = new Circle();
         position = new Position(x, y);
-        pawn.setRadius(30);
-        if(pieceColor == PieceColor.WHITE){
-            pawn.setFill(Color.WHITE);
+
+        circle = new Circle();
+        circle.setRadius(30);
+        if(this.pieceColor == PieceColor.WHITE){
+            circle.setFill(Color.WHITE);
         } else {
-            pawn.setFill(Color.BLACK);
+            circle.setFill(Color.BLACK);
         }
-        pawn.setCursor(Cursor.HAND);
-        pawn.setOnMousePressed(this::pressed);
-        pawn.setOnMouseDragged(this::dragged);
-        pawn.setOnMouseReleased(this::released);
+        circle.setCursor(Cursor.HAND);
+        circle.setOnMousePressed(this::pressed);
+        circle.setOnMouseDragged(this::dragged);
+        circle.setOnMouseReleased(this::released);
     }
 
     public void pressed(MouseEvent e) {
-        draggedPawn = (Circle) e.getSource();
+        draggedCircle = (Circle) e.getSource();
+        //draggedCircle.setStyle("-fx-image: url(https://img.itch.zone/aW1hZ2UvMjIxMDcyLzEwNDM4NzgucG5n/original/a5kQN6.png)");
         orgSceneX = e.getSceneX();
         orgSceneY = e.getSceneY();
-        orgTranslateX = draggedPawn.getTranslateX();
-        orgTranslateY = draggedPawn.getTranslateY();
-        draggedPawn.toFront();
+        orgTranslateX = draggedCircle.getTranslateX();
+        orgTranslateY = draggedCircle.getTranslateY();
+        draggedCircle.toFront();
+        legalMoves = GameController.getInstance().select(getPosition().getCurrentX(), getPosition().getCurrentY());
+        maxMoves = GameController.getInstance().getListsAndMaxMoves();
     }
 
     public void dragged(MouseEvent e) {
@@ -60,19 +73,32 @@ public class Piece{
         double newTranslateX = orgTranslateX + offsetX;
         double newTranslateY = orgTranslateY + offsetY;
 
-        draggedPawn.setTranslateX(newTranslateX);
-        draggedPawn.setTranslateY(newTranslateY);
+        draggedCircle.setTranslateX(newTranslateX);
+        draggedCircle.setTranslateY(newTranslateY);
     }
 
     public void released(MouseEvent e) {
-        draggedPawn.setTranslateX(0);
-        draggedPawn.setTranslateY(0);
-        if(((int)e.getSceneX()-30)/70 >= 0 && ((int)e.getSceneY()-40)/70 >= 0 && ((int)e.getSceneX()-30)/70 <= 9 && ((int)e.getSceneY()-40)/70 <= 9) {
-            GridPane.setRowIndex(draggedPawn, ((int) e.getSceneY()-40)/70);
-            GridPane.setColumnIndex(draggedPawn, ((int) e.getSceneX()-30)/70);
+        draggedCircle.setTranslateX(0);
+        draggedCircle.setTranslateY(0);
+        if (((int) e.getSceneX() - 30) / 70 >= 0 && ((int) e.getSceneY() - 40) / 70 >= 0 && ((int) e.getSceneX() - 30) / 70 <= 9 && ((int) e.getSceneY() - 40) / 70 <= 9 && legalMoves != null && ((prevMaxMoves > 1 && draggedCircle == prevCircle) || prevMaxMoves == 1)) {
+            legalMoves.forEach(
+                    j -> {
+                        for(Position position: j) {
+                            if (position.getCurrentX() == ((int) e.getSceneX() - 30) / 70 && position.getCurrentY() == ((int) e.getSceneY() - 40) / 70) {
+                                GridPane.setRowIndex(draggedCircle, ((int) e.getSceneY() - 40) / 70);
+                                GridPane.setColumnIndex(draggedCircle, ((int) e.getSceneX() - 30) / 70);
+                                GameController.getInstance().move(getPosition().getCurrentX(), getPosition().getCurrentY(), ((int) e.getSceneX() - 30) / 70, ((int) e.getSceneY() - 40) / 70);
+                                moveTo(((int) e.getSceneX() - 30) / 70, ((int) e.getSceneY() - 40) / 70);
+                                prevCircle = draggedCircle;
+                                prevMaxMoves = maxMoves;
+                            }
+                        }
+                    }
+            );
         } else {
-            GridPane.setRowIndex(draggedPawn, ((int) orgSceneY-30)/70);
-            GridPane.setColumnIndex(draggedPawn, ((int) orgSceneX-40)/70);
+            GridPane.setRowIndex(draggedCircle, ((int) orgSceneY - 30) / 70);
+            GridPane.setColumnIndex(draggedCircle, ((int) orgSceneX - 40) / 70);
+            moveTo(((int) orgSceneX - 40) / 70, ((int) orgSceneY - 30) / 70);
         }
     }
 

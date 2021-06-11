@@ -2,8 +2,11 @@ package org.example;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import org.example.view.GameView;
 
@@ -12,10 +15,12 @@ import java.net.URL;
 
 public class Checkers extends Application {
 
+    BorderPane rootPane;
+
     @Override
     public void start(Stage stage) throws Exception {
         URL url = new File("src/main/java/org/example/view/gameview.fxml").toURI().toURL();
-        BorderPane rootPane = FXMLLoader.load(url);
+        rootPane = FXMLLoader.load(url);
         stage.setScene(new Scene(rootPane, 800, 1100));
         stage.setHeight(800);
         stage.setWidth(1100);
@@ -25,4 +30,5 @@ public class Checkers extends Application {
         stage.setMinWidth(1100);
         stage.show();
     }
+
 }
