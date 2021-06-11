@@ -1,6 +1,7 @@
 package org.example.controller;
 
 import javafx.geometry.Pos;
+import org.example.Checkers;
 import org.example.model.Board;
 import org.example.model.piece.Piece;
 import org.example.model.piece.enums.PieceColor;
@@ -58,34 +59,33 @@ public class GameController {
         return maxMoves;
     }
 
-    public void move(){
-        System.out.println(this.board.getWhitePieces().size());
-        System.out.println(this.board.getBlackPieces().size());
-        Piece p;
-        this.board.printBoard();
-        Scanner scan = new Scanner(System.in);
+    public List<List<Position>> select(int pX, int pY) {
+        //System.out.println(this.board.getWhitePieces().size());
+        //System.out.println(this.board.getBlackPieces().size());
         int maxMove = getListsAndMaxMoves();
         System.out.println(maxMove);
-        System.out.println("Enter " + this.onMove + "'s next move");
-        int pX,pY;
-        do {
-        pX = scan.nextInt();//fromX
-        pY = scan.nextInt();//fromY
-        p = this.board.getPiece(pX,pY);
-        }while(p.getPieceColor() != onMove || p.getMoves() != maxMove ||  (anyJumps != p.getCanJump()));
-        System.out.println("Following positions are available:");
-        this.moveValidator.getValidMoves(p).forEach(
-                j -> {
-                    System.out.println("\nList of moves:");
-                    for(Position position: j){
-                        System.out.print("[" + position.getCurrentX() + "," + position.getCurrentY() + "]");
+        Piece p;
+        p = getBoard().getPiece(pX, pY);
+        if(p.getPieceColor() == onMove && p.getMoves() == maxMove && (anyJumps == p.getCanJump())) {
+            System.out.println("Following positions are available:");
+            this.moveValidator.getValidMoves(p).forEach(
+                    j -> {
+                        System.out.println("\nList of moves:");
+                        for (Position position : j) {
+                            System.out.print("[" + position.getCurrentX() + "," + position.getCurrentY() + "]");
+                        }
                     }
-                }
-        );
+            );
+            return this.moveValidator.getValidMoves(p);
+        } else {
+            return null;
+        }
+    }
+
+    public void move(int pX, int pY, int nX, int nY) {
         List<List<Position>> list = this.moveValidator.getValidMoves(board.getPiece(pX ,pY));
         int nOfMoves = (list.isEmpty())?0:list.get(0).size();
         while(nOfMoves-- > 0) {
-            int nX = scan.nextInt(), nY = scan.nextInt();//toX,toY
             if(list.stream().anyMatch(j -> j.contains(new Position(nX,nY)))) {
                 this.board.movePiece(this.board.getPiece(pX, pY), nX, nY);
                 capture(pX,pY,nX,nY);
@@ -95,7 +95,6 @@ public class GameController {
                 moved.setMoveList(this.moveValidator.getValidMoves(moved));
                 promote(this.board.getPiece(pX,pY));
                 if(nOfMoves > 0) {
-                    this.board.printBoard();
                     this.board.getPiece(pX, pY).getMoveList().forEach(
                             j -> {
                                 System.out.println("\nList of moves:");
@@ -111,6 +110,7 @@ public class GameController {
             }
         }
         changeTurn();
+        this.board.printBoard();
     }
 
     void capture(int Px, int Py, int Nx, int Ny){
@@ -120,7 +120,7 @@ public class GameController {
         for(; x != Nx && y != Ny; x+=cX , y+=cY) {
             System.out.println(x + " " + y);
             if (this.board.getPiece(x, y) != null) {
-                this.board.removePiece(x,y);
+                this.board.removePiece(x, y);
                 break;
             }
         }
@@ -133,8 +133,8 @@ public class GameController {
     }
 
     public void run(){
-        while(true){
-            move();
-        }
+        this.anyJumps = false;
+        this.onMove = PieceColor.WHITE;
+        this.board.printBoard();
     }
 }
