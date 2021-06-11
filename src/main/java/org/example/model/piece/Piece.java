@@ -62,9 +62,9 @@ public class Piece{
         orgSceneY = e.getSceneY();
         orgTranslateX = draggedCircle.getTranslateX();
         orgTranslateY = draggedCircle.getTranslateY();
-        draggedCircle.toFront();
-        legalMoves = GameController.getInstance().select(getPosition().getCurrentX(), getPosition().getCurrentY());
+        legalMoves = GameController.getInstance().select(((int) e.getSceneX() - 30) / 70, ((int) e.getSceneY() - 40) / 70);
         maxMoves = GameController.getInstance().getListsAndMaxMoves();
+        draggedCircle.toFront();
     }
 
     public void dragged(MouseEvent e) {
@@ -88,7 +88,6 @@ public class Piece{
                                 GridPane.setRowIndex(draggedCircle, ((int) e.getSceneY() - 40) / 70);
                                 GridPane.setColumnIndex(draggedCircle, ((int) e.getSceneX() - 30) / 70);
                                 GameController.getInstance().move(getPosition().getCurrentX(), getPosition().getCurrentY(), ((int) e.getSceneX() - 30) / 70, ((int) e.getSceneY() - 40) / 70);
-                                moveTo(((int) e.getSceneX() - 30) / 70, ((int) e.getSceneY() - 40) / 70);
                                 prevCircle = draggedCircle;
                                 prevMaxMoves = maxMoves;
                             }
@@ -98,7 +97,6 @@ public class Piece{
         } else {
             GridPane.setRowIndex(draggedCircle, ((int) orgSceneY - 30) / 70);
             GridPane.setColumnIndex(draggedCircle, ((int) orgSceneX - 40) / 70);
-            moveTo(((int) orgSceneX - 40) / 70, ((int) orgSceneY - 30) / 70);
         }
     }
 
