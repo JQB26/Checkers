@@ -89,12 +89,9 @@ public class Board implements IBoard {
 
     public void removePiece(int x, int y){
         List<Piece> removingFrom = tiles[x][y].getPiece().getPieceColor() == PieceColor.WHITE ? this.whitePieces : this.blackPieces;
-        System.out.println(tiles[x][y].getPiece().getPieceColor());
         int i = 0;
         for(; i < removingFrom.size(); i++){
             Piece p = removingFrom.get(i);
-            System.out.print("X " + p.getPosition().getCurrentX() + " y " + p.getPosition().getCurrentY());
-            System.out.println();
             if(p.getPosition().equals(new Position(x,y))) {
                 break;
             }

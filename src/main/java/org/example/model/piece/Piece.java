@@ -21,14 +21,10 @@ public class Piece{
     private boolean isActive;
     private double orgSceneX, orgSceneY, orgTranslateX, orgTranslateY;
     private Circle draggedCircle;
-    private Circle prevCircle;
-    private GridPane boardPane;
     private List<List<Position>> moveList = new ArrayList<>();
     private int moves;
     private boolean canJump = false;
     private List<List<Position>> legalMoves;
-    private int maxMoves;
-    private int prevMaxMoves = 1;
 
     public Circle getCircle() {
         return circle;
@@ -54,14 +50,13 @@ public class Piece{
 
     public void pressed(MouseEvent e) {
         draggedCircle = (Circle) e.getSource();
-        //draggedCircle.setStyle("-fx-image: url(https://img.itch.zone/aW1hZ2UvMjIxMDcyLzEwNDM4NzgucG5n/original/a5kQN6.png)");
         orgSceneX = e.getSceneX();
         orgSceneY = e.getSceneY();
         orgTranslateX = draggedCircle.getTranslateX();
         orgTranslateY = draggedCircle.getTranslateY();
         draggedCircle.toFront();
-        legalMoves = GameController.getInstance().select(getPosition().getCurrentX(), getPosition().getCurrentY());
-        maxMoves = GameController.getInstance().getListsAndMaxMoves();
+        legalMoves = GameController.getInstance().select(((int) e.getSceneX() - 30) / 70, ((int) e.getSceneY() - 40) / 70);
+        draggedCircle.toFront();
     }
 
     public void dragged(MouseEvent e) {
@@ -77,25 +72,19 @@ public class Piece{
     public void released(MouseEvent e) {
         draggedCircle.setTranslateX(0);
         draggedCircle.setTranslateY(0);
-        if (((int) e.getSceneX() - 30) / 70 >= 0 && ((int) e.getSceneY() - 40) / 70 >= 0 && ((int) e.getSceneX() - 30) / 70 <= 9 && ((int) e.getSceneY() - 40) / 70 <= 9 && legalMoves != null && ((prevMaxMoves > 1 && draggedCircle == prevCircle) || prevMaxMoves == 1)) {
+        if (((int) e.getSceneX() - 30) / 70 >= 0 && ((int) e.getSceneY() - 40) / 70 >= 0 && ((int) e.getSceneX() - 30) / 70 <= 9 && ((int) e.getSceneY() - 40) / 70 <= 9 && legalMoves != null) {
             legalMoves.forEach(
-                    j -> {
-                        for(Position position: j) {
-                            if (position.getCurrentX() == ((int) e.getSceneX() - 30) / 70 && position.getCurrentY() == ((int) e.getSceneY() - 40) / 70) {
-                                GridPane.setRowIndex(draggedCircle, ((int) e.getSceneY() - 40) / 70);
-                                GridPane.setColumnIndex(draggedCircle, ((int) e.getSceneX() - 30) / 70);
-                                GameController.getInstance().move(getPosition().getCurrentX(), getPosition().getCurrentY(), ((int) e.getSceneX() - 30) / 70, ((int) e.getSceneY() - 40) / 70);
-                                moveTo(((int) e.getSceneX() - 30) / 70, ((int) e.getSceneY() - 40) / 70);
-                                prevCircle = draggedCircle;
-                                prevMaxMoves = maxMoves;
-                            }
-                        }
+                j -> {
+                    if (j.get(0).getCurrentX() == ((int) e.getSceneX() - 30) / 70 && j.get(0).getCurrentY() == ((int) e.getSceneY() - 40) / 70) {
+                        GridPane.setRowIndex(draggedCircle, ((int) e.getSceneY() - 40) / 70);
+                        GridPane.setColumnIndex(draggedCircle, ((int) e.getSceneX() - 30) / 70);
+                        GameController.getInstance().move(((int) (orgSceneX - 30) / 70), ((int) (orgSceneY - 40) / 70), ((int) e.getSceneX() - 30) / 70, ((int) e.getSceneY() - 40) / 70);
                     }
+                }
             );
         } else {
             GridPane.setRowIndex(draggedCircle, ((int) orgSceneY - 30) / 70);
             GridPane.setColumnIndex(draggedCircle, ((int) orgSceneX - 40) / 70);
-            moveTo(((int) orgSceneX - 40) / 70, ((int) orgSceneY - 30) / 70);
         }
     }
 
