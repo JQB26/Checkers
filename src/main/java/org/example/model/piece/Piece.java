@@ -6,12 +6,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import org.example.Checkers;
 import org.example.controller.GameController;
 import org.example.model.position.Position;
 import org.example.model.piece.enums.PieceColor;
 import org.example.model.piece.enums.PieceType;
-import org.example.view.GameView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,14 +22,10 @@ public class Piece{
     private boolean isActive;
     private double orgSceneX, orgSceneY, orgTranslateX, orgTranslateY;
     private Circle draggedCircle;
-    private Circle prevCircle;
-    private GridPane boardPane;
     private List<List<Position>> moveList = new ArrayList<>();
     private int moves;
     private boolean canJump = false;
     private List<List<Position>> legalMoves;
-    private int maxMoves;
-    private int prevMaxMoves = 1;
 
     public Circle getCircle() {
         return circle;
@@ -63,7 +57,6 @@ public class Piece{
         orgTranslateY = draggedCircle.getTranslateY();
         draggedCircle.toFront();
         legalMoves = GameController.getInstance().select(((int) e.getSceneX() - 30) / 70, ((int) e.getSceneY() - 40) / 70);
-        maxMoves = (legalMoves == null)?0:legalMoves.size();
         draggedCircle.toFront();
     }
 
@@ -80,19 +73,15 @@ public class Piece{
     public void released(MouseEvent e) {
         draggedCircle.setTranslateX(0);
         draggedCircle.setTranslateY(0);
-        if (((int) e.getSceneX() - 30) / 70 >= 0 && ((int) e.getSceneY() - 40) / 70 >= 0 && ((int) e.getSceneX() - 30) / 70 <= 9 && ((int) e.getSceneY() - 40) / 70 <= 9 && legalMoves != null && maxMoves > 0) {
+        if (((int) e.getSceneX() - 30) / 70 >= 0 && ((int) e.getSceneY() - 40) / 70 >= 0 && ((int) e.getSceneX() - 30) / 70 <= 9 && ((int) e.getSceneY() - 40) / 70 <= 9 && legalMoves != null) {
             legalMoves.forEach(
-                    j -> {
-                        for(Position position: j) {
-                            if (position.getCurrentX() == ((int) e.getSceneX() - 30) / 70 && position.getCurrentY() == ((int) e.getSceneY() - 40) / 70) {
-                                GridPane.setRowIndex(draggedCircle, ((int) e.getSceneY() - 40) / 70);
-                                GridPane.setColumnIndex(draggedCircle, ((int) e.getSceneX() - 30) / 70);
-                                GameController.getInstance().move(((int) (orgSceneX - 30) / 70), ((int) (orgSceneY - 40) / 70), ((int) e.getSceneX() - 30) / 70, ((int) e.getSceneY() - 40) / 70);
-                                prevCircle = draggedCircle;
-                                prevMaxMoves = maxMoves;
-                            }
-                        }
+                j -> {
+                    if (j.get(0).getCurrentX() == ((int) e.getSceneX() - 30) / 70 && j.get(0).getCurrentY() == ((int) e.getSceneY() - 40) / 70) {
+                        GridPane.setRowIndex(draggedCircle, ((int) e.getSceneY() - 40) / 70);
+                        GridPane.setColumnIndex(draggedCircle, ((int) e.getSceneX() - 30) / 70);
+                        GameController.getInstance().move(((int) (orgSceneX - 30) / 70), ((int) (orgSceneY - 40) / 70), ((int) e.getSceneX() - 30) / 70, ((int) e.getSceneY() - 40) / 70);
                     }
+                }
             );
         } else {
             GridPane.setRowIndex(draggedCircle, ((int) orgSceneY - 30) / 70);

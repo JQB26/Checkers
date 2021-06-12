@@ -56,6 +56,9 @@ public class GameController {
         this.anyJumps=false;
         prevX = 0;
         prevY = 0;
+        movesLeft = getListsAndMaxMoves();
+        this.board.printBoard();
+        moved = null;
     }
 
     public void setBoardPane(GridPane gp){
@@ -128,7 +131,7 @@ public class GameController {
             this.moveValidator.getValidMoves(p).forEach(
                     j -> {
                         for (Position position : j) {
-                            addMoveHighlight(position.getCurrentX(),position.getCurrentY());
+                            addMoveHighlight(j.indexOf(position) == 0, position.getCurrentX(),position.getCurrentY());
                         }
                     }
             );
@@ -140,7 +143,7 @@ public class GameController {
             moved.getMoveList().forEach(
                     j -> {
                         for (Position position : j) {
-                            addMoveHighlight(position.getCurrentX(),position.getCurrentY());
+                            addMoveHighlight(j.indexOf(position) == 0, position.getCurrentX(),position.getCurrentY());
                         }
                     }
             );
@@ -161,11 +164,11 @@ public class GameController {
         pY = nY;
         moved.setMoveList(this.moveValidator.getValidMoves(moved));
         promote(this.board.getPiece(pX,pY));
+        select(nX, nY);
         if (movesLeft == 0) {
-            moved = null;
+            removeTileHighlight(nX, nY);
+            removeMoveHighlight();
             changeTurn();
-            this.board.printBoard();
-            movesLeft = getListsAndMaxMoves();
         }
     }
 
@@ -186,19 +189,19 @@ public class GameController {
     void promote(Piece piece){
         if ((piece.getPosition().getCurrentY() == 0 && piece.getPieceColor() == PieceColor.BLACK) || (piece.getPosition().getCurrentY() == 9 && piece.getPieceColor() == PieceColor.WHITE)){
             piece.setPieceType(PieceType.QUEEN);
+            Image img;
             if (piece.getPieceColor() == PieceColor.BLACK) {
-                Image img = new Image("file:src/main/resources/black_queen.png");
-                ((Circle)gridPane.getChildren().get(gridPane.getChildren().indexOf(getPiece(piece.getPosition().getCurrentX(), piece.getPosition().getCurrentY())))).setFill(new ImagePattern(img));
+                img = new Image("file:src/main/resources/black_queen.png");
             } else {
-                Image img = new Image("file:src/main/resources/white_queen.png");
-                ((Circle)gridPane.getChildren().get(gridPane.getChildren().indexOf(getPiece(piece.getPosition().getCurrentX(), piece.getPosition().getCurrentY())))).setFill(new ImagePattern(img));
+                img = new Image("file:src/main/resources/white_queen.png");
             }
+            ((Circle)gridPane.getChildren().get(gridPane.getChildren().indexOf(getPiece(piece.getPosition().getCurrentX(), piece.getPosition().getCurrentY())))).setFill(new ImagePattern(img));
 
         }
     }
 
     void addTileHighlight(int x, int y){
-        ((Rectangle)gridPane.getChildren().get(gridPane.getChildren().indexOf(getTile(x,y)))).setFill(Color.color(0.3,0.3,0.1));
+        ((Rectangle)gridPane.getChildren().get(gridPane.getChildren().indexOf(getTile(x,y)))).setFill(Color.color(0.3,0.35,0.1));
     }
 
     void removeTileHighlight(int x, int y){
@@ -209,17 +212,22 @@ public class GameController {
         }
     }
 
-    void addMoveHighlight(int x, int y){
+    void addMoveHighlight(boolean first, int x, int y){
         Circle circle = new Circle();
-        circle.setFill(Color.color(0.3,0.3,0.1));
-        circle.setRadius(10);
-        circle.setCursor(Cursor.HAND);
-        circle.setOnMousePressed(this::pressed);
+        if(first){
+            circle.setFill(Color.color(0.3,0.35,0.1));
+            circle.setRadius(10);
+            circle.setCursor(Cursor.HAND);
+            circle.setOnMousePressed(this::pressed);
+        } else {
+            circle.setFill(Color.color(0.3,0.3,0.3));
+            circle.setRadius(10);
+        }
         gridPane.add(circle,x,y);
         GridPane.setHalignment(circle, HPos.CENTER);
     }
 
-    public void removeMoveHighlight(){
+    void removeMoveHighlight(){
         getHighlight().forEach(
                 j-> gridPane.getChildren().remove(j)
         );
