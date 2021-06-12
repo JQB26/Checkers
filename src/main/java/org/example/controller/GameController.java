@@ -4,9 +4,11 @@ import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import org.example.model.Board;
@@ -16,6 +18,8 @@ import org.example.model.piece.enums.PieceType;
 import org.example.model.position.Position;
 import org.example.view.GameView;
 
+import java.io.File;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -100,10 +104,7 @@ public class GameController {
         List<Piece> pieces = (this.onMove==PieceColor.WHITE)?this.board.getWhitePieces():this.board.getBlackPieces();
         int maxMoves = 0;
         for(Piece p : pieces) {
-//            System.out.println("PIECE: [" + p.getPosition().getCurrentX() + "," + p.getPosition().getCurrentY() + "] moves: ");
             p.setMoveList(this.moveValidator.getValidMoves(p));
-//            p.getMoveList().forEach(list -> list.forEach(pos -> System.out.print("["+ pos.getCurrentX() + "," + pos.getCurrentY() + "]")));
-//            System.out.println();
             int moves = (p.getMoveList().isEmpty())?0:p.getMoveList().get(0).size();
             p.setMoves(moves);
             if(p.getCanJump())
@@ -173,7 +174,6 @@ public class GameController {
         int cY = Py < Ny ? 1 : -1;
         int x = Px + cX, y = Py + cY;
         for(; x != Nx && y != Ny; x+=cX , y+=cY) {
-            System.out.println(x + " " + y);
             if (this.board.getPiece(x, y) != null) {
                 gridPane.getChildren().remove(getPiece(x,y));
                 this.board.removePiece(x, y);
@@ -184,9 +184,16 @@ public class GameController {
     }
 
     void promote(Piece piece){
-        if (piece.getPosition().getCurrentY() == 0 || piece.getPosition().getCurrentY() == 9){
+        if ((piece.getPosition().getCurrentY() == 0 && piece.getPieceColor() == PieceColor.BLACK) || (piece.getPosition().getCurrentY() == 9 && piece.getPieceColor() == PieceColor.WHITE)){
             piece.setPieceType(PieceType.QUEEN);
-            ((Circle)gridPane.getChildren().get(gridPane.getChildren().indexOf(getPiece(piece.getPosition().getCurrentX(), piece.getPosition().getCurrentY())))).setStroke(Color.RED);
+            if (piece.getPieceColor() == PieceColor.BLACK) {
+                Image img = new Image("file:src/main/resources/black_queen.png");
+                ((Circle)gridPane.getChildren().get(gridPane.getChildren().indexOf(getPiece(piece.getPosition().getCurrentX(), piece.getPosition().getCurrentY())))).setFill(new ImagePattern(img));
+            } else {
+                Image img = new Image("file:src/main/resources/white_queen.png");
+                ((Circle)gridPane.getChildren().get(gridPane.getChildren().indexOf(getPiece(piece.getPosition().getCurrentX(), piece.getPosition().getCurrentY())))).setFill(new ImagePattern(img));
+            }
+
         }
     }
 
@@ -212,7 +219,7 @@ public class GameController {
         GridPane.setHalignment(circle, HPos.CENTER);
     }
 
-    void removeMoveHighlight(){
+    public void removeMoveHighlight(){
         getHighlight().forEach(
                 j-> gridPane.getChildren().remove(j)
         );

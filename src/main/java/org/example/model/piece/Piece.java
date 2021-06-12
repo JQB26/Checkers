@@ -57,7 +57,6 @@ public class Piece{
 
     public void pressed(MouseEvent e) {
         draggedCircle = (Circle) e.getSource();
-        //draggedCircle.setStyle("-fx-image: url(https://img.itch.zone/aW1hZ2UvMjIxMDcyLzEwNDM4NzgucG5n/original/a5kQN6.png)");
         orgSceneX = e.getSceneX();
         orgSceneY = e.getSceneY();
         orgTranslateX = draggedCircle.getTranslateX();
