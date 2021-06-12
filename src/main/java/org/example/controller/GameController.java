@@ -4,19 +4,23 @@ import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import org.example.Checkers;
 import org.example.model.Board;
 import org.example.model.piece.Piece;
 import org.example.model.piece.enums.PieceColor;
 import org.example.model.piece.enums.PieceType;
 import org.example.model.position.Position;
 import org.example.view.GameView;
+import org.example.view.Resultview;
 
 import java.io.File;
 import java.net.URL;
@@ -36,6 +40,7 @@ public class GameController {
     private int movesLeft = 0;
     private Piece moved = null;
     private static final GameController INSTANCE = new GameController();
+    private AnchorPane resultview;
 
     public static GameController getInstance(){return INSTANCE;}
 
@@ -45,6 +50,7 @@ public class GameController {
         this.gameView = new GameView();
         this.board.generateBoard();
         this.gridPane = new GridPane();
+        resultview = new AnchorPane();
     }
 
     public Board getBoard(){return this.board;}
@@ -57,12 +63,24 @@ public class GameController {
         prevX = 0;
         prevY = 0;
         movesLeft = getListsAndMaxMoves();
+        if(movesLeft == 0){
+            Checkers.setRoot("resultview");
+            if(this.onMove == PieceColor.WHITE) {
+                ((Label) resultview.getChildren().get(0)).setText("THE WINNER IS\n BLACK");
+            } else {
+                ((Label) resultview.getChildren().get(0)).setText("THE WINNER IS\n WHITE");
+            }
+        }
         this.board.printBoard();
         moved = null;
     }
 
     public void setBoardPane(GridPane gp){
         gridPane = gp;
+    }
+
+    public void setWinnerLabel(AnchorPane anchorPane) {
+        resultview = anchorPane;
     }
 
     public Node getPiece(int x, int y) {

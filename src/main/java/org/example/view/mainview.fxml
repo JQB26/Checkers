@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="CENTER" spacing="20.0" style="-fx-background-color: darkgray;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.view.MainView">
+   <children>
+      <Label style="-fx-padding: 70;" text="Checkers">
+         <font>
+            <Font size="48.0" />
+         </font></Label>
+      <Button fx:id="primaryButton" onAction="#switchToSecondary" style="-fx-background-color: white;" text="START">
+         <font>
+            <Font size="24.0" />
+         </font></Button>
+      <Label style="-fx-padding: 60;" text="Made by: Jan Ruszil, Jakub Szczepanek, Mateusz Wojtaczka" textAlignment="CENTER">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </Label>
+   </children>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+</VBox>
