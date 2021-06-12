@@ -42,21 +42,21 @@ public class Board implements IBoard {
 
     public void printBoard() {
         System.out.println("_____________________");
-        System.out.print( " |");
+        System.out.print(" |");
         for (int row = 0; row <= 9; row++)
-            System.out.print( row + "|");
+            System.out.print(row + "|");
         System.out.println();
         for (int row = 0; row <= 9; row++) {
             System.out.print(row + "|");
             for (int col = 0; col <= 9; col++) {
                 if (tiles[col][row].getPiece() != null) {
                     if (tiles[col][row].getPiece().getPieceColor() == PieceColor.WHITE) {
-                        if(tiles[col][row].getPiece().getPieceType() == PieceType.PAWN)
+                        if (tiles[col][row].getPiece().getPieceType() == PieceType.PAWN)
                             System.out.print("W|");
                         else
                             System.out.print("Q|");
                     } else {
-                        if(tiles[col][row].getPiece().getPieceType() == PieceType.PAWN)
+                        if (tiles[col][row].getPiece().getPieceType() == PieceType.PAWN)
                             System.out.print("B|");
                         else
                             System.out.print("q|");
@@ -85,14 +85,16 @@ public class Board implements IBoard {
         return tiles[x][y].getPiece();
     }
 
-    public Tile[][] getTiles(){return this.tiles;}
+    public Tile[][] getTiles() {
+        return this.tiles;
+    }
 
-    public void removePiece(int x, int y){
+    public void removePiece(int x, int y) {
         List<Piece> removingFrom = tiles[x][y].getPiece().getPieceColor() == PieceColor.WHITE ? this.whitePieces : this.blackPieces;
         int i = 0;
-        for(; i < removingFrom.size(); i++){
+        for (; i < removingFrom.size(); i++) {
             Piece p = removingFrom.get(i);
-            if(p.getPosition().equals(new Position(x,y))) {
+            if (p.getPosition().equals(new Position(x, y))) {
                 break;
             }
         }

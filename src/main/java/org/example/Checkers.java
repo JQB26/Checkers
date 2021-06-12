@@ -41,7 +41,7 @@ public class Checkers extends Application {
         return FXMLLoader.load(url);
     }
 
-    public void prepareStage(Stage stage){
+    public void prepareStage(Stage stage) {
         stage.setHeight(800);
         stage.setWidth(1100);
         stage.setMaxHeight(800);

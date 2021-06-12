@@ -6,18 +6,18 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import org.example.controller.GameController;
-import org.example.model.position.Position;
 import org.example.model.piece.enums.PieceColor;
 import org.example.model.piece.enums.PieceType;
+import org.example.model.position.Position;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Piece{
+public class Piece {
     private Circle circle;
     private PieceType pieceType;
     private PieceColor pieceColor;
-    private Position position;
+    private final Position position;
     private boolean isActive;
     private double orgSceneX, orgSceneY, orgTranslateX, orgTranslateY;
     private Circle draggedCircle;
@@ -37,7 +37,7 @@ public class Piece{
 
         circle = new Circle();
         circle.setRadius(30);
-        if(this.pieceColor == PieceColor.WHITE){
+        if (this.pieceColor == PieceColor.WHITE) {
             circle.setFill(Color.WHITE);
         } else {
             circle.setFill(Color.BLACK);
@@ -74,13 +74,13 @@ public class Piece{
         draggedCircle.setTranslateY(0);
         if (((int) e.getSceneX() - 30) / 70 >= 0 && ((int) e.getSceneY() - 40) / 70 >= 0 && ((int) e.getSceneX() - 30) / 70 <= 9 && ((int) e.getSceneY() - 40) / 70 <= 9 && legalMoves != null) {
             legalMoves.forEach(
-                j -> {
-                    if (j.get(0).getCurrentX() == ((int) e.getSceneX() - 30) / 70 && j.get(0).getCurrentY() == ((int) e.getSceneY() - 40) / 70) {
-                        GridPane.setRowIndex(draggedCircle, ((int) e.getSceneY() - 40) / 70);
-                        GridPane.setColumnIndex(draggedCircle, ((int) e.getSceneX() - 30) / 70);
-                        GameController.getInstance().move(((int) (orgSceneX - 30) / 70), ((int) (orgSceneY - 40) / 70), ((int) e.getSceneX() - 30) / 70, ((int) e.getSceneY() - 40) / 70);
+                    j -> {
+                        if (j.get(0).getCurrentX() == ((int) e.getSceneX() - 30) / 70 && j.get(0).getCurrentY() == ((int) e.getSceneY() - 40) / 70) {
+                            GridPane.setRowIndex(draggedCircle, ((int) e.getSceneY() - 40) / 70);
+                            GridPane.setColumnIndex(draggedCircle, ((int) e.getSceneX() - 30) / 70);
+                            GameController.getInstance().move(((int) (orgSceneX - 30) / 70), ((int) (orgSceneY - 40) / 70), ((int) e.getSceneX() - 30) / 70, ((int) e.getSceneY() - 40) / 70);
+                        }
                     }
-                }
             );
         } else {
             GridPane.setRowIndex(draggedCircle, ((int) orgSceneY - 30) / 70);
@@ -96,7 +96,7 @@ public class Piece{
         position.moveTo(x, y);
     }
 
-    public void promote(){
+    public void promote() {
         pieceType = PieceType.QUEEN;
     }
 
@@ -128,16 +128,28 @@ public class Piece{
         isActive = active;
     }
 
-    public void setMoveList(List<List<Position>> moveList){this.moveList = moveList;}
+    public void setMoveList(List<List<Position>> moveList) {
+        this.moveList = moveList;
+    }
 
-    public List<List<Position>> getMoveList(){return this.moveList;}
+    public List<List<Position>> getMoveList() {
+        return this.moveList;
+    }
 
-    public void setMoves(int moves) { this.moves = moves; }
+    public void setMoves(int moves) {
+        this.moves = moves;
+    }
 
-    public int getMoves() { return moves; }
+    public int getMoves() {
+        return moves;
+    }
 
-    public void setCanJump(boolean canJump) { this.canJump = canJump; }
+    public void setCanJump(boolean canJump) {
+        this.canJump = canJump;
+    }
 
-    public boolean getCanJump() { return canJump; }
+    public boolean getCanJump() {
+        return canJump;
+    }
 
 }

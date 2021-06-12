@@ -12,7 +12,7 @@ import org.example.model.Tile.Tile;
 
 public class GameView {
 
-    private Board board = new Board();
+    private final Board board = new Board();
 
     @FXML
     private GridPane boardPane;
@@ -24,20 +24,20 @@ public class GameView {
         GameController.getInstance().setBoardPane(boardPane);
     }
 
-    public void generateBoard(){
+    public void generateBoard() {
         int j = 0;
-        for(int row = 0; row <= 9; row++){
-            for(int col = 0; col <= 9; col++){
+        for (int row = 0; row <= 9; row++) {
+            for (int col = 0; col <= 9; col++) {
                 Tile tile = board.getTile(col, row);
                 boardPane.add(tile.getRectangle(), col, row);
-                if(tile.getPiece() != null) {
+                if (tile.getPiece() != null) {
                     boardPane.add(tile.getPiece().getCircle(), col, row);
                     GridPane.setHalignment(tile.getPiece().getCircle(), HPos.CENTER);
                 }
             }
         }
 
-        for(int i = 0; i <= 9; i++){
+        for (int i = 0; i <= 9; i++) {
             Rectangle rectangle = new Rectangle();
             Text text = new Text();
             rectangle.setFill(Color.BLACK);
@@ -51,7 +51,7 @@ public class GameView {
             boardPane.add(text, 10, i);
         }
 
-        for(int i = 0; i <= 9; i++){
+        for (int i = 0; i <= 9; i++) {
             Rectangle rectangle = new Rectangle();
             Text text = new Text();
             rectangle.setFill(Color.BLACK);

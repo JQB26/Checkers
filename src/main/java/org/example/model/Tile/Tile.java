@@ -7,20 +7,11 @@ import org.example.model.position.Position;
 
 public class Tile {
 
-    public Rectangle getRectangle() {
-        return rectangle;
-    }
-
     private Rectangle rectangle;
-    private Position position;
+    private final Position position;
     private boolean visited = false;
-
-    public void setPiece(Piece piece) {
-        this.piece = piece;
-    }
-
     private Piece piece;
-    private Color color;
+
 
     public Tile(boolean lightTile, int x, int y, Piece piece) {
         position = new Position(x, y);
@@ -46,7 +37,19 @@ public class Tile {
         return piece;
     }
 
-    public boolean isVisited(){return visited;}
+    public void setPiece(Piece piece) {
+        this.piece = piece;
+    }
 
-    public void setVisited(boolean visited){this.visited = visited;}
+    public Rectangle getRectangle() {
+        return rectangle;
+    }
+
+    public boolean isVisited() {
+        return visited;
+    }
+
+    public void setVisited(boolean visited) {
+        this.visited = visited;
+    }
 }
