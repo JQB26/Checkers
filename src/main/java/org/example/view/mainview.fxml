@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
@@ -14,11 +15,17 @@
       <Button fx:id="primaryButton" onAction="#switchToSecondary" style="-fx-background-color: white;" text="START">
          <font>
             <Font size="24.0" />
-         </font></Button>
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
       <Label style="-fx-padding: 60;" text="Made by: Jan Ruszil, Jakub Szczepanek, Mateusz Wojtaczka" textAlignment="CENTER">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
+         <VBox.margin>
+            <Insets top="200.0" />
+         </VBox.margin>
       </Label>
    </children>
    <padding>
