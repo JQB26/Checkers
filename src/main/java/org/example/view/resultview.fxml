@@ -4,12 +4,16 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.view.Resultview">
+<AnchorPane fx:id="anchorPane" prefHeight="800.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.view.Resultview">
    <children>
-      <Label fx:id="matchResultLabel" alignment="CENTER" layoutX="219.0" layoutY="154.0" prefHeight="93.0" prefWidth="162.0">
-         <font>
-            <Font size="64.0" />
-         </font>
-      </Label>
+      <BorderPane prefHeight="800.0" prefWidth="1100.0">
+         <center>
+            <Label fx:id="matchResultLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="800.0" prefWidth="1100.0" textAlignment="CENTER" BorderPane.alignment="CENTER">
+               <font>
+                  <Font size="64.0" />
+               </font>
+            </Label>
+         </center>
+      </BorderPane>
    </children>
 </AnchorPane>
