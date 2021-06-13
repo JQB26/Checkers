@@ -6,22 +6,31 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import org.example.Checkers;
 import org.example.controller.GameController;
 import org.example.model.Board;
 import org.example.model.Tile.Tile;
 
 public class GameView {
 
-    private final Board board = new Board();
+    private Board board;
 
     @FXML
     private GridPane boardPane;
 
     @FXML
     public void initialize() {
+        board = new Board();
         board.generateBoard();
         generateBoard();
         GameController.getInstance().setBoardPane(boardPane);
+    }
+
+    @FXML
+    public void restartGame(){
+        Checkers.setRoot("mainview");
+        GameController.getInstance().startGame();
+        GameController.getInstance().run();
     }
 
     public void generateBoard() {

@@ -8,7 +8,7 @@ import java.io.IOException;
 public class MainView {
 
     @FXML
-    private void switchToSecondary() throws IOException {
+    private void switchToSecondary() {
         Checkers.setRoot("gameview");
     }
 }

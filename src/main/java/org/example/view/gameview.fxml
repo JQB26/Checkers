@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <BorderPane maxHeight="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: darkgray;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.view.GameView">
     <right>
-        <VBox prefHeight="700.0" prefWidth="300.0" BorderPane.alignment="CENTER" />
+        <VBox alignment="TOP_CENTER" prefHeight="700.0" prefWidth="300.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="restartButton" mnemonicParsing="false" onAction="#restartGame" style="-fx-background-color: white;" text="RESTART">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="100.0" />
+               </VBox.margin>
+            </Button>
+         </children></VBox>
     </right>
     <center>
         <GridPane fx:id="boardPane" maxHeight="710.0" maxWidth="710.0" minHeight="710.0" minWidth="710.0" prefHeight="710.0" prefWidth="710.0" style="-fx-border-color: black; -fx-border-width: 3;" BorderPane.alignment="CENTER">
