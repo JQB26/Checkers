@@ -18,7 +18,6 @@ public class Piece {
     private PieceType pieceType;
     private PieceColor pieceColor;
     private final Position position;
-    private boolean isActive;
     private double orgSceneX, orgSceneY, orgTranslateX, orgTranslateY;
     private Circle draggedCircle;
     private List<List<Position>> moveList = new ArrayList<>();
@@ -116,18 +115,6 @@ public class Piece {
         return pieceColor;
     }
 
-    public void setPieceColor(PieceColor pieceColor) {
-        this.pieceColor = pieceColor;
-    }
-
-    public boolean isActive() {
-        return isActive;
-    }
-
-    public void setActive(boolean active) {
-        isActive = active;
-    }
-
     public void setMoveList(List<List<Position>> moveList) {
         this.moveList = moveList;
     }
@@ -148,8 +135,6 @@ public class Piece {
         this.canJump = canJump;
     }
 
-    public boolean getCanJump() {
-        return canJump;
-    }
+    public boolean getCanJump() { return canJump; }
 
 }

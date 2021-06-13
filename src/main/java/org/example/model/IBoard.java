@@ -6,10 +6,9 @@ import org.example.model.piece.Piece;
 import java.util.ArrayList;
 
 public interface IBoard {
-    Tile[][] tiles = new Tile[10][10];
-    ArrayList<Piece> whitePieces = new ArrayList<Piece>();
-    ArrayList<Piece> blackPieces = new ArrayList<Piece>();
 
     void generateBoard();
     void movePiece(Piece piece, int x, int y);
+    void removePiece(int x, int y);
+
 }

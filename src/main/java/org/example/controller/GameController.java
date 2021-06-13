@@ -24,10 +24,8 @@ import org.example.view.GameView;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class GameController {
     private Board board;
-    private GameView gameView;
     private MoveValidator moveValidator;
     private PieceColor onMove = PieceColor.WHITE;
     private GridPane gridPane;
@@ -37,16 +35,18 @@ public class GameController {
     private int movesLeft = 0;
     private Piece moved = null;
     private static final GameController INSTANCE = new GameController();
-    private AnchorPane resultview;
+    private AnchorPane resultView;
 
+    public static GameController getInstance() {
+        return INSTANCE;
+    }
 
     public void startGame() {
         this.board = new Board();
         this.moveValidator = new MoveValidator(this.board);
-        this.gameView = new GameView();
         this.board.generateBoard();
         this.gridPane = new GridPane();
-        resultview = new AnchorPane();
+        resultView = new AnchorPane();
     }
 
     public void changeTurn() {
@@ -58,9 +58,9 @@ public class GameController {
         if (movesLeft == 0) {
             Checkers.setRoot("resultview");
             if (this.onMove == PieceColor.WHITE) {
-                ((Label) resultview.getChildren().get(0)).setText("THE WINNER IS\n BLACK");
+                ((Label) resultView.getChildren().get(0)).setText("THE WINNER IS\n BLACK");
             } else {
-                ((Label) resultview.getChildren().get(0)).setText("THE WINNER IS\n WHITE");
+                ((Label) resultView.getChildren().get(0)).setText("THE WINNER IS\n WHITE");
             }
         }
         this.board.printBoard();
@@ -71,7 +71,7 @@ public class GameController {
         this.anyJumps = false;
         this.onMove = PieceColor.WHITE;
         this.board.printBoard();
-        movesLeft = getListsAndMaxMoves();
+        this.movesLeft = getListsAndMaxMoves();
     }
 
     void pressed(MouseEvent e) {
@@ -80,7 +80,6 @@ public class GameController {
         GridPane.setColumnIndex(node, ((int) e.getSceneX() - 30) / 70);
         move(prevX, prevY, ((int) e.getSceneX() - 30) / 70, ((int) e.getSceneY() - 40) / 70);
     }
-
 
     // MOVES
 
@@ -177,10 +176,8 @@ public class GameController {
                 img = new Image("file:src/main/resources/white_queen.png");
             }
             ((Circle) gridPane.getChildren().get(gridPane.getChildren().indexOf(getPiece(piece.getPosition().getCurrentX(), piece.getPosition().getCurrentY())))).setFill(new ImagePattern(img));
-
         }
     }
-
 
     // HIGHLIGHTING
 
@@ -192,7 +189,6 @@ public class GameController {
                 result.add(node);
             }
         }
-
         return result;
     }
 
@@ -229,13 +225,12 @@ public class GameController {
         );
     }
 
-
-    public void setBoardPane(GridPane gp) {
-        gridPane = gp;
+    public void setBoardPane(GridPane gridPane) {
+        this.gridPane = gridPane;
     }
 
     public void setWinnerLabel(AnchorPane anchorPane) {
-        resultview = anchorPane;
+        resultView = anchorPane;
     }
 
     public Node getPiece(int x, int y) {
@@ -247,7 +242,6 @@ public class GameController {
                 break;
             }
         }
-
         return result;
     }
 
@@ -260,19 +254,7 @@ public class GameController {
                 break;
             }
         }
-
         return result;
     }
 
-    public static GameController getInstance() {
-        return INSTANCE;
-    }
-
-    public Board getBoard() {
-        return this.board;
-    }
-
-    public GameView getGameView() {
-        return this.gameView;
-    }
 }

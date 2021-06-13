@@ -24,9 +24,7 @@ public class MoveValidator {
     public List<Position> getJumps(Position pos, PieceColor color) {
         ArrayList<Position> results = new ArrayList<>();
         int x = pos.getCurrentX(), y = pos.getCurrentY();
-
         int[] dirDestX = {-2, 2, -2, 2}, dirDestY = {-2, -2, 2, 2}, dirThroughX = {-1, 1, -1, 1}, dirThroughY = {-1, -1, 1, 1};
-
         // jumps over opponents' pieces
         for (int dir = 0; dir <= 3; dir++) {
             int toX = x + dirDestX[dir], toY = y + dirDestY[dir], throughX = x + dirThroughX[dir], throughY = y + dirThroughY[dir];
@@ -226,15 +224,9 @@ public class MoveValidator {
         return oneMoves;
     }
 
-    public void unVisit() {
-        Arrays.stream(this.board.getTiles()).forEach(t -> Arrays.stream(t).forEach(tile -> tile.setVisited(false)));
-    }
+    public void unVisit() { Arrays.stream(this.board.getTiles()).forEach(t -> Arrays.stream(t).forEach(tile -> tile.setVisited(false))); }
 
     public List<List<Position>> getValidMoves(Piece piece) {
-        ArrayList<Position> results = new ArrayList<>();
-        int x = piece.getPosition().getCurrentX();
-        int y = piece.getPosition().getCurrentY();
-
         // >1 space moves
         List<Position> jumps = trimJumps(piece);
         List<List<Position>> allJumps = new ArrayList<>();
