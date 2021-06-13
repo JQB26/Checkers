@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
 <AnchorPane fx:id="anchorPane" prefHeight="800.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.view.Resultview">
    <children>
-      <BorderPane prefHeight="800.0" prefWidth="1100.0">
+      <BorderPane prefHeight="800.0" prefWidth="1100.0" style="-fx-background-color: darkgrey;">
          <center>
             <Label fx:id="matchResultLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="800.0" prefWidth="1100.0" textAlignment="CENTER" BorderPane.alignment="CENTER">
                <font>
@@ -14,6 +16,19 @@
                </font>
             </Label>
          </center>
+         <bottom>
+            <Button mnemonicParsing="false" onAction="#restartGame" style="-fx-background-color: white;" text="RESTART" BorderPane.alignment="CENTER">
+               <font>
+                  <Font size="36.0" />
+               </font>
+               <BorderPane.margin>
+                  <Insets bottom="80.0" />
+               </BorderPane.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </bottom>
       </BorderPane>
    </children>
 </AnchorPane>

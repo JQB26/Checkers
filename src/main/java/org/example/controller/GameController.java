@@ -58,9 +58,9 @@ public class GameController {
         if (movesLeft == 0) {
             Checkers.setRoot("resultview");
             if (this.onMove == PieceColor.WHITE) {
-                ((Label) resultView.getChildren().get(0)).setText("THE WINNER IS\n BLACK");
+                ((Label) resultView.getChildren().get(0)).setText("THE WINNER IS BLACK");
             } else {
-                ((Label) resultView.getChildren().get(0)).setText("THE WINNER IS\n WHITE");
+                ((Label) resultView.getChildren().get(0)).setText("THE WINNER IS WHITE");
             }
         }
         this.board.printBoard();
