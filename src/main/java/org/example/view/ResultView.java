@@ -6,7 +6,7 @@ import javafx.scene.layout.AnchorPane;
 import org.example.Checkers;
 import org.example.controller.GameController;
 
-public class Resultview {
+public class ResultView {
 
     @FXML
     Label matchResultLabel;

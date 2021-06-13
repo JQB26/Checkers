@@ -9,7 +9,7 @@ import org.example.model.position.Position;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Board implements IBoard {
+public class Board {
     private final Tile[][] tiles;
     private final ArrayList<Piece> whitePieces;
     private final ArrayList<Piece> blackPieces;
