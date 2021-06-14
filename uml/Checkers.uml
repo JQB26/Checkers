@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>org.example.view.Resultview</OriginalElement>
+  <nodes>
+    <node x="17.749999999999943" y="0.0">org.example.model.piece.enums.PieceColor</node>
+    <node x="137.0" y="733.0">org.example.StartCheckers</node>
+    <node x="78.0" y="650.0">org.example.Checkers</node>
+    <node x="223.0" y="101.0">org.example.model.piece.Piece</node>
+    <node x="487.53120987158894" y="733.0">org.example.view.GameView</node>
+    <node x="299.75" y="0.0">org.example.model.position.Position</node>
+    <node x="160.75" y="0.0">org.example.model.piece.enums.PieceType</node>
+    <node x="298.0" y="733.0">org.example.view.Resultview</node>
+    <node x="350.0" y="224.0">org.example.model.Tile.Tile</node>
+    <node x="0.0" y="733.0">org.example.view.MainView</node>
+    <node x="120.24999999999997" y="440.0">org.example.controller.MoveValidator</node>
+    <node x="100.13537653825563" y="565.0">org.example.controller.GameController</node>
+    <node x="234.0" y="224.0">org.example.model.IBoard</node>
+    <node x="270.69604735152456" y="327.0">org.example.model.Board</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="org.example.view.MainView" target="org.example.Checkers" relationship="DEPENDENCY">
+      <point x="0.0" y="-15.5" />
+      <point x="58.5" y="712.0" />
+      <point x="133.0" y="712.0" />
+      <point x="0.0" y="15.5" />
+    </edge>
+    <edge source="org.example.view.Resultview" target="org.example.controller.GameController" relationship="DEPENDENCY">
+      <point x="30.5" y="-15.5" />
+      <point x="389.5" y="628.0" />
+      <point x="282.0080758426966" y="628.0" />
+      <point x="282.0080758426966" y="618.0" />
+      <point x="217.88537653825563" y="618.0" />
+      <point x="39.25" y="15.5" />
+    </edge>
+    <edge source="org.example.model.piece.Piece" target="org.example.model.piece.enums.PieceType" relationship="DEPENDENCY">
+      <point x="-12.428571428571416" y="-15.5" />
+      <point x="254.07142857142856" y="71.0" />
+      <point x="190.5" y="71.0" />
+      <point x="-29.75" y="15.5" />
+    </edge>
+    <edge source="org.example.view.GameView" target="org.example.model.Board" relationship="TO_ONE">
+      <point x="0.0" y="-15.5" />
+      <point x="549.031209871589" y="419.0" />
+      <point x="468.5" y="419.0" />
+      <point x="468.5" y="389.0" />
+      <point x="293.69604735152456" y="389.0" />
+      <point x="-23.0" y="15.5" />
+    </edge>
+    <edge source="org.example.model.Tile.Tile" target="org.example.model.piece.Piece" relationship="DEPENDENCY">
+      <point x="-28.5" y="-15.5" />
+      <point x="359.5" y="203.0" />
+      <point x="223.5" y="203.0" />
+      <point x="223.5" y="173.0" />
+      <point x="266.5" y="173.0" />
+      <point x="0.0" y="15.5" />
+    </edge>
+    <edge source="org.example.model.IBoard" target="org.example.model.piece.Piece" relationship="DEPENDENCY">
+      <point x="0.0" y="-15.5" />
+      <point x="282.0" y="203.0" />
+      <point x="223.5" y="203.0" />
+      <point x="223.5" y="173.0" />
+      <point x="266.5" y="173.0" />
+      <point x="0.0" y="15.5" />
+    </edge>
+    <edge source="org.example.model.piece.Piece" target="org.example.model.position.Position" relationship="CREATE">
+      <point x="37.28571428571428" y="-15.5" />
+      <point x="303.7857142857143" y="71.0" />
+      <point x="357.8604133226322" y="71.0" />
+      <point x="357.8604133226322" y="61.0" />
+      <point x="378.5" y="61.0" />
+      <point x="26.25" y="15.5" />
+    </edge>
+    <edge source="org.example.model.Board" target="org.example.model.piece.enums.PieceColor" relationship="DEPENDENCY">
+      <point x="-40.25" y="-15.5" />
+      <point x="276.44604735152456" y="306.0" />
+      <point x="187.78188536650603" y="306.0" />
+      <point x="187.78188536650603" y="153.0" />
+      <point x="133.23214285714283" y="153.0" />
+      <point x="133.23214285714283" y="81.0" />
+      <point x="96.71755617977504" y="81.0" />
+      <point x="96.71755617977504" y="51.0" />
+      <point x="109.99999999999994" y="51.0" />
+      <point x="30.75" y="15.5" />
+    </edge>
+    <edge source="org.example.model.Board" target="org.example.model.IBoard" relationship="REALIZATION">
+      <point x="-5.75" y="-15.5" />
+      <point x="310.94604735152456" y="276.0" />
+      <point x="282.0" y="276.0" />
+      <point x="0.0" y="15.5" />
+    </edge>
+    <edge source="org.example.view.GameView" target="org.example.controller.GameController" relationship="DEPENDENCY">
+      <point x="-24.600000000000023" y="-15.5" />
+      <point x="524.4312098715889" y="702.0" />
+      <point x="433.2" y="702.0" />
+      <point x="433.2" y="628.0" />
+      <point x="282.0080758426966" y="628.0" />
+      <point x="282.0080758426966" y="618.0" />
+      <point x="217.88537653825563" y="618.0" />
+      <point x="39.25" y="15.5" />
+    </edge>
+    <edge source="org.example.StartCheckers" target="org.example.Checkers" relationship="DEPENDENCY">
+      <point x="0.0" y="-15.5" />
+      <point x="207.5" y="712.0" />
+      <point x="133.0" y="712.0" />
+      <point x="0.0" y="15.5" />
+    </edge>
+    <edge source="org.example.view.GameView" target="org.example.model.Tile.Tile" relationship="DEPENDENCY">
+      <point x="49.200000000000045" y="-15.5" />
+      <point x="598.231209871589" y="702.0" />
+      <point x="571.031209871589" y="702.0" />
+      <point x="571.031209871589" y="306.0" />
+      <point x="458.0" y="306.0" />
+      <point x="458.0" y="276.0" />
+      <point x="407.0" y="276.0" />
+      <point x="19.0" y="15.5" />
+    </edge>
+    <edge source="org.example.model.piece.Piece" target="org.example.model.piece.enums.PieceColor" relationship="TO_ONE">
+      <point x="-37.28571428571428" y="-15.5" />
+      <point x="229.21428571428572" y="61.0" />
+      <point x="37.38537653825557" y="61.0" />
+      <point x="37.38537653825557" y="51.0" />
+      <point x="48.49999999999994" y="51.0" />
+      <point x="-30.75" y="15.5" />
+    </edge>
+    <edge source="org.example.controller.GameController" target="org.example.Checkers" relationship="DEPENDENCY">
+      <point x="-39.25" y="15.5" />
+      <point x="139.38537653825563" y="628.0" />
+      <point x="105.5" y="628.0" />
+      <point x="-27.5" y="-15.5" />
+    </edge>
+    <edge source="org.example.Checkers" target="org.example.controller.GameController" relationship="DEPENDENCY">
+      <point x="27.5" y="-15.5" />
+      <point x="160.5" y="628.0" />
+      <point x="282.0080758426966" y="628.0" />
+      <point x="282.0080758426966" y="618.0" />
+      <point x="217.88537653825563" y="618.0" />
+      <point x="39.25" y="15.5" />
+    </edge>
+    <edge source="org.example.model.piece.Piece" target="org.example.model.position.Position" relationship="TO_ONE">
+      <point x="12.428571428571445" y="-15.5" />
+      <point x="278.92857142857144" y="81.0" />
+      <point x="326.0" y="81.0" />
+      <point x="-26.25" y="15.5" />
+    </edge>
+    <edge source="org.example.model.Tile.Tile" target="org.example.model.position.Position" relationship="TO_ONE">
+      <point x="-9.5" y="-15.5" />
+      <point x="378.5" y="81.0" />
+      <point x="326.0" y="81.0" />
+      <point x="-26.25" y="15.5" />
+    </edge>
+    <edge source="org.example.model.piece.Piece" target="org.example.controller.GameController" relationship="DEPENDENCY">
+      <point x="-29.0" y="15.5" />
+      <point x="237.5" y="183.0" />
+      <point x="70.38537653825557" y="183.0" />
+      <point x="70.38537653825557" y="513.0" />
+      <point x="145.92704320492226" y="513.0" />
+      <point x="-32.70833333333337" y="-15.5" />
+    </edge>
+    <edge source="org.example.controller.GameController" target="org.example.model.piece.Piece" relationship="DEPENDENCY">
+      <point x="-19.62500000000003" y="-15.5" />
+      <point x="159.0103765382556" y="503.0" />
+      <point x="81.38537653825557" y="503.0" />
+      <point x="81.38537653825557" y="203.0" />
+      <point x="223.5" y="203.0" />
+      <point x="223.5" y="173.0" />
+      <point x="266.5" y="173.0" />
+      <point x="0.0" y="15.5" />
+    </edge>
+    <edge source="org.example.controller.GameController" target="org.example.model.piece.enums.PieceType" relationship="DEPENDENCY">
+      <point x="-45.791666666666714" y="-15.5" />
+      <point x="132.8437098715889" y="523.0" />
+      <point x="59.38537653825557" y="523.0" />
+      <point x="59.38537653825557" y="163.0" />
+      <point x="182.23214285714283" y="163.0" />
+      <point x="182.23214285714283" y="71.0" />
+      <point x="190.5" y="71.0" />
+      <point x="-29.75" y="15.5" />
+    </edge>
+    <edge source="org.example.controller.MoveValidator" target="org.example.model.position.Position" relationship="CREATE">
+      <point x="-21.428571428571445" y="-15.5" />
+      <point x="173.82142857142853" y="419.0" />
+      <point x="163.15688536650603" y="419.0" />
+      <point x="163.15688536650603" y="193.0" />
+      <point x="320.5" y="193.0" />
+      <point x="320.5" y="71.0" />
+      <point x="357.8604133226322" y="71.0" />
+      <point x="357.8604133226322" y="61.0" />
+      <point x="378.5" y="61.0" />
+      <point x="26.25" y="15.5" />
+    </edge>
+    <edge source="org.example.controller.GameController" target="org.example.controller.MoveValidator" relationship="CREATE">
+      <point x="-6.541666666666686" y="-15.5" />
+      <point x="172.09370987158894" y="493.0" />
+      <point x="145.24999999999997" y="493.0" />
+      <point x="-50.0" y="15.5" />
+    </edge>
+    <edge source="org.example.controller.GameController" target="org.example.model.piece.enums.PieceColor" relationship="DEPENDENCY">
+      <point x="-58.87500000000006" y="-15.5" />
+      <point x="119.76037653825557" y="533.0" />
+      <point x="48.38537653825557" y="533.0" />
+      <point x="48.38537653825557" y="81.0" />
+      <point x="96.71755617977504" y="81.0" />
+      <point x="96.71755617977504" y="51.0" />
+      <point x="109.99999999999994" y="51.0" />
+      <point x="30.75" y="15.5" />
+    </edge>
+    <edge source="org.example.controller.GameController" target="org.example.model.Board" relationship="TO_ONE">
+      <point x="32.70833333333334" y="-15.5" />
+      <point x="211.34370987158897" y="513.0" />
+      <point x="468.5" y="513.0" />
+      <point x="468.5" y="389.0" />
+      <point x="293.69604735152456" y="389.0" />
+      <point x="-23.0" y="15.5" />
+    </edge>
+    <edge source="org.example.controller.MoveValidator" target="org.example.model.Board" relationship="DEPENDENCY">
+      <point x="64.28571428571428" y="-15.5" />
+      <point x="259.5357142857142" y="409.0" />
+      <point x="479.5" y="409.0" />
+      <point x="479.5" y="379.0" />
+      <point x="339.69604735152456" y="379.0" />
+      <point x="23.0" y="15.5" />
+    </edge>
+    <edge source="org.example.model.Board" target="org.example.model.Tile.Tile" relationship="CREATE">
+      <point x="40.25" y="-15.5" />
+      <point x="356.94604735152456" y="306.0" />
+      <point x="458.0" y="306.0" />
+      <point x="458.0" y="276.0" />
+      <point x="407.0" y="276.0" />
+      <point x="19.0" y="15.5" />
+    </edge>
+    <edge source="org.example.model.piece.Piece" target="org.example.model.piece.enums.PieceType" relationship="TO_ONE">
+      <point x="0.0" y="-15.5" />
+      <point x="266.5" y="61.0" />
+      <point x="250.0" y="61.0" />
+      <point x="29.75" y="15.5" />
+    </edge>
+    <edge source="org.example.controller.GameController" target="org.example.model.position.Position" relationship="DEPENDENCY">
+      <point x="71.95833333333334" y="-15.5" />
+      <point x="250.59370987158897" y="543.0" />
+      <point x="501.5" y="543.0" />
+      <point x="501.5" y="71.0" />
+      <point x="357.8604133226322" y="71.0" />
+      <point x="357.8604133226322" y="61.0" />
+      <point x="378.5" y="61.0" />
+      <point x="26.25" y="15.5" />
+    </edge>
+    <edge source="org.example.controller.GameController" target="org.example.controller.MoveValidator" relationship="TO_ONE">
+      <point x="19.625" y="-15.5" />
+      <point x="198.26037653825563" y="503.0" />
+      <point x="245.24999999999997" y="503.0" />
+      <point x="50.0" y="15.5" />
+    </edge>
+    <edge source="org.example.controller.GameController" target="org.example.controller.MoveValidator" relationship="GENERALIZATION">
+      <point x="6.541666666666657" y="-15.5" />
+      <point x="185.17704320492228" y="493.0" />
+      <point x="195.24999999999997" y="493.0" />
+      <point x="0.0" y="15.5" />
+    </edge>
+    <edge source="org.example.model.Board" target="org.example.model.piece.Piece" relationship="TO_MANY">
+      <point x="17.25" y="-15.5" />
+      <point x="333.94604735152456" y="286.0" />
+      <point x="436.5" y="286.0" />
+      <point x="436.5" y="183.0" />
+      <point x="295.5" y="183.0" />
+      <point x="29.0" y="15.5" />
+    </edge>
+    <edge source="org.example.model.Board" target="org.example.model.Tile.Tile" relationship="TO_MANY">
+      <point x="5.75" y="-15.5" />
+      <point x="322.44604735152456" y="276.0" />
+      <point x="369.0" y="276.0" />
+      <point x="-19.0" y="15.5" />
+    </edge>
+    <edge source="org.example.model.Board" target="org.example.model.piece.enums.PieceType" relationship="DEPENDENCY">
+      <point x="-28.75" y="-15.5" />
+      <point x="287.94604735152456" y="296.0" />
+      <point x="212.5" y="296.0" />
+      <point x="212.5" y="71.0" />
+      <point x="190.5" y="71.0" />
+      <point x="-29.75" y="15.5" />
+    </edge>
+    <edge source="org.example.view.Resultview" target="org.example.Checkers" relationship="DEPENDENCY">
+      <point x="-30.5" y="-15.5" />
+      <point x="328.5" y="712.0" />
+      <point x="133.0" y="712.0" />
+      <point x="0.0" y="15.5" />
+    </edge>
+    <edge source="org.example.controller.MoveValidator" target="org.example.model.piece.enums.PieceType" relationship="DEPENDENCY">
+      <point x="-42.85714285714289" y="-15.5" />
+      <point x="152.15688536650603" y="173.0" />
+      <point x="190.5" y="173.0" />
+      <point x="-29.75" y="15.5" />
+    </edge>
+    <edge source="org.example.model.Board" target="org.example.model.position.Position" relationship="CREATE">
+      <point x="28.75" y="-15.5" />
+      <point x="345.44604735152456" y="296.0" />
+      <point x="447.5" y="296.0" />
+      <point x="447.5" y="71.0" />
+      <point x="357.8604133226322" y="71.0" />
+      <point x="357.8604133226322" y="61.0" />
+      <point x="378.5" y="61.0" />
+      <point x="26.25" y="15.5" />
+    </edge>
+    <edge source="org.example.controller.GameController" target="org.example.model.Board" relationship="CREATE">
+      <point x="45.791666666666686" y="-15.5" />
+      <point x="224.4270432049223" y="523.0" />
+      <point x="479.5" y="523.0" />
+      <point x="479.5" y="379.0" />
+      <point x="339.69604735152456" y="379.0" />
+      <point x="23.0" y="15.5" />
+    </edge>
+    <edge source="org.example.controller.MoveValidator" target="org.example.model.Tile.Tile" relationship="DEPENDENCY">
+      <point x="21.428571428571416" y="-15.5" />
+      <point x="216.6785714285714" y="399.0" />
+      <point x="458.0" y="399.0" />
+      <point x="458.0" y="276.0" />
+      <point x="407.0" y="276.0" />
+      <point x="19.0" y="15.5" />
+    </edge>
+    <edge source="org.example.controller.MoveValidator" target="org.example.model.piece.Piece" relationship="DEPENDENCY">
+      <point x="0.0" y="-15.5" />
+      <point x="195.24999999999997" y="409.0" />
+      <point x="174.15688536650603" y="409.0" />
+      <point x="174.15688536650603" y="203.0" />
+      <point x="223.5" y="203.0" />
+      <point x="223.5" y="173.0" />
+      <point x="266.5" y="173.0" />
+      <point x="0.0" y="15.5" />
+    </edge>
+    <edge source="org.example.view.GameView" target="org.example.Checkers" relationship="DEPENDENCY">
+      <point x="-49.19999999999999" y="-15.5" />
+      <point x="499.83120987158895" y="712.0" />
+      <point x="133.0" y="712.0" />
+      <point x="0.0" y="15.5" />
+    </edge>
+    <edge source="org.example.controller.GameController" target="org.example.model.piece.enums.PieceColor" relationship="TO_ONE">
+      <point x="-71.9583333333334" y="-15.5" />
+      <point x="106.67704320492223" y="543.0" />
+      <point x="37.38537653825557" y="543.0" />
+      <point x="37.38537653825557" y="51.0" />
+      <point x="48.49999999999994" y="51.0" />
+      <point x="-30.75" y="15.5" />
+    </edge>
+    <edge source="org.example.model.piece.Piece" target="org.example.model.piece.enums.PieceColor" relationship="DEPENDENCY">
+      <point x="-24.857142857142833" y="-15.5" />
+      <point x="241.64285714285717" y="81.0" />
+      <point x="96.71755617977504" y="81.0" />
+      <point x="96.71755617977504" y="51.0" />
+      <point x="109.99999999999994" y="51.0" />
+      <point x="30.75" y="15.5" />
+    </edge>
+    <edge source="org.example.model.piece.Piece" target="org.example.model.position.Position" relationship="TO_MANY">
+      <point x="24.857142857142833" y="-15.5" />
+      <point x="291.35714285714283" y="81.0" />
+      <point x="326.0" y="81.0" />
+      <point x="-26.25" y="15.5" />
+    </edge>
+    <edge source="org.example.view.GameView" target="org.example.model.Board" relationship="CREATE">
+      <point x="24.600000000000023" y="-15.5" />
+      <point x="573.6312098715889" y="712.0" />
+      <point x="560.031209871589" y="712.0" />
+      <point x="560.031209871589" y="409.0" />
+      <point x="479.5" y="409.0" />
+      <point x="479.5" y="379.0" />
+      <point x="339.69604735152456" y="379.0" />
+      <point x="23.0" y="15.5" />
+    </edge>
+    <edge source="org.example.controller.MoveValidator" target="org.example.model.Board" relationship="TO_ONE">
+      <point x="42.85714285714283" y="-15.5" />
+      <point x="238.1071428571428" y="419.0" />
+      <point x="468.5" y="419.0" />
+      <point x="468.5" y="389.0" />
+      <point x="293.69604735152456" y="389.0" />
+      <point x="-23.0" y="15.5" />
+    </edge>
+    <edge source="org.example.controller.MoveValidator" target="org.example.model.piece.enums.PieceColor" relationship="DEPENDENCY">
+      <point x="-64.2857142857143" y="-15.5" />
+      <point x="130.96428571428567" y="419.0" />
+      <point x="108.60714285714283" y="419.0" />
+      <point x="108.60714285714283" y="81.0" />
+      <point x="96.71755617977504" y="81.0" />
+      <point x="96.71755617977504" y="51.0" />
+      <point x="109.99999999999994" y="51.0" />
+      <point x="30.75" y="15.5" />
+    </edge>
+    <edge source="org.example.model.Board" target="org.example.model.piece.Piece" relationship="CREATE">
+      <point x="-17.25" y="-15.5" />
+      <point x="299.44604735152456" y="286.0" />
+      <point x="223.5" y="286.0" />
+      <point x="223.5" y="173.0" />
+      <point x="266.5" y="173.0" />
+      <point x="0.0" y="15.5" />
+    </edge>
+    <edge source="org.example.model.Tile.Tile" target="org.example.model.position.Position" relationship="CREATE">
+      <point x="9.5" y="-15.5" />
+      <point x="397.5" y="203.0" />
+      <point x="389.5" y="203.0" />
+      <point x="389.5" y="71.0" />
+      <point x="357.8604133226322" y="71.0" />
+      <point x="357.8604133226322" y="61.0" />
+      <point x="378.5" y="61.0" />
+      <point x="26.25" y="15.5" />
+    </edge>
+    <edge source="org.example.controller.GameController" target="org.example.model.piece.Piece" relationship="TO_ONE">
+      <point x="58.875" y="-15.5" />
+      <point x="237.51037653825563" y="533.0" />
+      <point x="490.5" y="533.0" />
+      <point x="490.5" y="203.0" />
+      <point x="436.5" y="203.0" />
+      <point x="436.5" y="183.0" />
+      <point x="295.5" y="183.0" />
+      <point x="29.0" y="15.5" />
+    </edge>
+    <edge source="org.example.model.Tile.Tile" target="org.example.model.piece.Piece" relationship="TO_ONE">
+      <point x="28.5" y="-15.5" />
+      <point x="416.5" y="203.0" />
+      <point x="436.5" y="203.0" />
+      <point x="436.5" y="183.0" />
+      <point x="295.5" y="183.0" />
+      <point x="29.0" y="15.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="0.8500000000000001" showDependencies="true" x="276.88082505729494" y="347.17647058823525" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

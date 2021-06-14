@@ -19,7 +19,6 @@ import org.example.model.piece.Piece;
 import org.example.model.piece.enums.PieceColor;
 import org.example.model.piece.enums.PieceType;
 import org.example.model.position.Position;
-import org.example.view.GameView;
 
 import java.util.ArrayList;
 import java.util.List;
